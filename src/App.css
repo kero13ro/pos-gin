@@ -1,8 +1,6 @@
 /* .ant-radio-group ant-radio-group-outline */
-.aa {
+.RadioGroup {
   display: flex;
   flex-direction: column;
-  /* width: 0%; */
-  /* max-width: 400px; */
   width: 130px;
 }
