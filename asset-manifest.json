@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pos-gin/static/css/main.325ed59c.css",
+    "main.js": "/pos-gin/static/js/main.d67acad9.js",
+    "index.html": "/pos-gin/index.html",
+    "main.325ed59c.css.map": "/pos-gin/static/css/main.325ed59c.css.map",
+    "main.d67acad9.js.map": "/pos-gin/static/js/main.d67acad9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.325ed59c.css",
+    "static/js/main.d67acad9.js"
+  ]
+}
