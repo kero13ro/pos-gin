@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Header from "./comp/Header";
+import Header from "./components/Header";
 import { Radio } from "antd";
 import { allItems } from "./data/category";
+import { axiosIns } from "./utilities/axios";
 
 import "./App.css";
 
@@ -11,16 +11,16 @@ const App = () => {
 
   const onChange4 = (e) => {
     setValue4(e.target.value);
-    axios.get(`https://sheet1218.herokuapp.com/all`).then((res) => {
+
+    axiosIns.get(`all`).then((res) => {
       console.log(res.data);
     });
   };
 
   useEffect(() => {
-    // axios.get(`https://sheet1218.herokuapp.com/all`).then((res) => {
-    // axios.get(`http://localhost:9107/all`).then((res) => {
-    //   console.log(res.data);
-    // });
+    axiosIns.get("/").then((res) => {
+      console.log(res.data);
+    });
   }, []);
 
   return (
