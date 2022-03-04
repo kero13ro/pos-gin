@@ -15,13 +15,13 @@ export default function Header() {
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="mail" icon={<MailOutlined />}>
-        結單
+        結帳
       </Menu.Item>
       <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
         入庫
       </Menu.Item>
       <Menu.Item key="app2" disabled icon={<AppstoreOutlined />}>
-        收支紀錄
+        查詢
       </Menu.Item>
       <Menu.Item key="app3" disabled icon={<SettingOutlined />}>
         設定
