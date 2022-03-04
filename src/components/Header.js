@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Menu } from "antd";
 import {
-  MailOutlined,
+  SearchOutlined,
   AppstoreOutlined,
+  ShoppingCartOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import { axiosIns } from "../utilities/axios";
@@ -14,20 +15,20 @@ export default function Header() {
   };
 
   const getAll = () => {
-    axiosIns.get(`all`).then((res) => {
-      console.log(res.data);
+    axiosIns.get("all").then((res) => {
+      alert(res.data);
     });
   };
 
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-      <Menu.Item key="mail" icon={<MailOutlined />}>
+      <Menu.Item key="mail" icon={<ShoppingCartOutlined />}>
         結帳
       </Menu.Item>
       <Menu.Item key="app" icon={<AppstoreOutlined onClick={getAll} />}>
         入庫
       </Menu.Item>
-      <Menu.Item key="app2" icon={<AppstoreOutlined />}>
+      <Menu.Item key="app2" icon={<SearchOutlined />}>
         查詢
       </Menu.Item>
       <Menu.Item key="app3" icon={<SettingOutlined />}>

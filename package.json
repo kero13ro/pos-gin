@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.18.9",
     "axios": "^0.26.0",
+    "dayjs": "^1.10.8",
     "gh-pages": "^3.2.3",
     "immer": "^9.0.12",
     "react": "^17.0.2",

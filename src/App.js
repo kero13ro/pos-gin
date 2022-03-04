@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import Header from "./components/Header";
+import ConfirmModal from "./components/ConfirmModal";
 import { Radio, Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
 import { allItems } from "./data/category";
 import { axiosIns } from "./utilities/axios";
+import dayjs from "dayjs";
 import "./App.scss";
-
-const { v4: uuidv4 } = require("uuid");
 
 const App = () => {
   const [tabMain, setTabMain] = useState(100);
@@ -37,18 +37,20 @@ const App = () => {
     setCart(arr);
   };
 
-  const submitCart = () => {
-    // const params = {
-    //   tradeId: uuidv4(),
-    //   date: new Date().toLocaleString(),
-    //   cart,
-    // };
+  const submitCart = async () => {
+    const params = {
+      date: new Date().toLocaleDateString(),
+      time: dayjs().format("HH:mm:ss"),
+      cart,
+    };
 
-    // console.log({ params });
-    axiosIns.post("add", cart).then((res) => {
-      console.log(res.data);
-    });
+    const res = await axiosIns.post("add", params);
+
+    return Promise.resolve(res);
   };
+
+  const cartSum = () =>
+    cart.map((item) => item.price).reduce((prev, curt) => prev + curt, 0);
 
   return (
     <div className="root">
@@ -100,15 +102,28 @@ const App = () => {
       </div>
       <div className="footer">
         <span>總金額</span>
-        <span>
-          {cart
-            .map((item) => item.price)
-            .reduce((prev, curt) => prev + curt, 0)}
-        </span>
+        <span>{cartSum()}</span>
         <span>元</span>
-        <Button type="primary" onClick={submitCart}>
-          確認結帳
-        </Button>
+
+        <span>/ 共 </span>
+        <span>{cart.length}</span>
+        <span>瓶</span>
+
+        <ConfirmModal
+          submitCart={submitCart}
+          disabled={!cart.length}
+          clearCart={() => setCart([])}
+        >
+          {cart.map((item, index) => (
+            <div className="previewList" key={index}>
+              <div className="mr-auto">{item.label}</div>
+              {item.price}元<div className="slash"> / </div>
+              {item.subName}
+            </div>
+          ))}
+
+          <div className="previewSum">{cartSum()}元</div>
+        </ConfirmModal>
       </div>
     </div>
   );

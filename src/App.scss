@@ -55,6 +55,21 @@
   border-bottom: 1px solid #ccc;
 }
 
+.previewList {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.previewSum {
+  padding: 3px;
+  color: rgb(203, 21, 21);
+  font-weight: bold;
+  text-align: right;
+}
+
+
 .slash {
   padding: 0 3px;
 }
