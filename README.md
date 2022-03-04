@@ -9,3 +9,7 @@ In the project directory, you can run:
 ### `npm run deploy`
 
 react-scripts build and deploy to github.
+
+PS.
+有安裝 useImmer，要確保 npm 版本，但目前尚未用到
+nvm use 16.13
