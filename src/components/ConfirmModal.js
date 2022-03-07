@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from "antd";
+import { Modal, Button, message } from "antd";
 
 export default function ConfirmModal(props) {
   const [visible, setVisible] = React.useState(false);
@@ -7,7 +7,12 @@ export default function ConfirmModal(props) {
 
   const handleOk = async () => {
     setConfirmLoading(true);
-    await props.submitCart();
+
+    try {
+      await props.submitCart();
+    } catch (error) {
+      message.info("伺服器錯誤: " + error);
+    }
 
     setVisible(false);
     setConfirmLoading(false);

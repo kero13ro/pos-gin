@@ -21,6 +21,7 @@ const allItems = [
     sub: [
       { id: 301, subName: "杯裝(700ml)", price: 65 },
       { id: 302, subName: "罐裝(1000ml)", price: 80 },
+      { id: 303, subName: "大罐裝(1500ml)", price: 120 },
     ],
   },
   {
@@ -45,6 +46,7 @@ const allItems = [
     sub: [
       { id: 601, subName: "杯裝(700ml)", price: 65 },
       { id: 602, subName: "罐裝(1000ml)", price: 80 },
+      { id: 603, subName: "大罐裝(1500ml)", price: 120 },
     ],
   },
   {
@@ -53,6 +55,7 @@ const allItems = [
     sub: [
       { id: 701, subName: "杯裝(700ml)", price: 65 },
       { id: 702, subName: "罐裝(1000ml)", price: 80 },
+      { id: 703, subName: "大罐裝(1500ml)", price: 120 },
     ],
   },
   {

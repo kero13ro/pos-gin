@@ -6,6 +6,8 @@ import {
   ShoppingCartOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+// import { message } from "antd";
+import { notification } from "antd";
 import { axiosIns } from "../utilities/axios";
 
 export default function Header() {
@@ -16,7 +18,14 @@ export default function Header() {
 
   const getAll = () => {
     axiosIns.get("all").then((res) => {
-      alert(res.data);
+      // message.info(res.data);
+      notification.open({
+        message: "全部庫存",
+        description: res.data,
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
   };
 
@@ -25,13 +34,13 @@ export default function Header() {
       <Menu.Item key="mail" icon={<ShoppingCartOutlined />}>
         結帳
       </Menu.Item>
-      <Menu.Item key="app" icon={<AppstoreOutlined onClick={getAll} />}>
+      <Menu.Item key="app" icon={<AppstoreOutlined />} disabled>
         入庫
       </Menu.Item>
-      <Menu.Item key="app2" icon={<SearchOutlined />}>
+      <Menu.Item key="app2" icon={<SearchOutlined onClick={getAll} />}>
         查詢
       </Menu.Item>
-      <Menu.Item key="app3" icon={<SettingOutlined />}>
+      <Menu.Item key="app3" icon={<SettingOutlined />} disabled>
         設定
       </Menu.Item>
     </Menu>

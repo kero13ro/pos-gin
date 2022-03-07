@@ -38,13 +38,17 @@ const App = () => {
   };
 
   const submitCart = async () => {
+    let res;
     const params = {
       date: new Date().toLocaleDateString(),
       time: dayjs().format("HH:mm:ss"),
       cart,
     };
-
-    const res = await axiosIns.post("add", params);
+    try {
+      res = await axiosIns.post("add", params);
+    } catch (error) {
+      return Promise.reject(error);
+    }
 
     return Promise.resolve(res);
   };
