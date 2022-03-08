@@ -1,9 +1,15 @@
-.root {
-  display: grid;
+.app {
   height: 100vh;
+  width: 100vw;
   max-width: 500px;
   margin: 0 auto;
-  grid-template-rows: 60px 1fr 1fr 45px;
+  border: 1px solid #ddd;
+}
+
+.checkout {
+  height: calc(100% - 46px);
+  display: grid;
+  grid-template-rows: 1fr 1fr 45px;
   grid-template-columns: 2fr 3fr;
   background-color: #f9f9f9;
 
@@ -40,7 +46,7 @@
   }
 }
 
-.header, .footer, .cartPanel {
+.footer, .cartPanel {
   grid-column: 1 / 3;
 }
 

@@ -6,7 +6,7 @@ import {
   ShoppingCartOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-// import { message } from "antd";
+import { Link } from "react-router-dom";
 import { notification } from "antd";
 import { axiosIns } from "../utilities/axios";
 
@@ -32,12 +32,12 @@ export default function Header() {
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="mail" icon={<ShoppingCartOutlined />}>
-        結帳
+        <Link to="/">結帳</Link>
       </Menu.Item>
-      <Menu.Item key="app" icon={<AppstoreOutlined />} disabled>
-        入庫
+      <Menu.Item key="app" icon={<AppstoreOutlined />}>
+        <Link to="/restock">結帳</Link>
       </Menu.Item>
-      <Menu.Item key="app2" icon={<SearchOutlined onClick={getAll} />}>
+      <Menu.Item key="app2" icon={<SearchOutlined onClick={getAll} disabled />}>
         查詢
       </Menu.Item>
       <Menu.Item key="app3" icon={<SettingOutlined />} disabled>
