@@ -1,22 +1,16 @@
 import React, { useState, useRef } from "react";
 import ConfirmModal from "./ConfirmModal";
-import { Radio, Button } from "antd";
+import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
-import { allItems } from "../data/category";
+// import { allItems } from "../data/category";
+import StockList from "./StockList";
 import { axiosIns } from "../utilities/axios";
 import dayjs from "dayjs";
 
 const Checkout = () => {
-  const [tabMain, setTabMain] = useState(100);
   const [cart, setCart] = useState([]);
   const cartPanel = useRef(null);
-
-  const tabSubMenu = () => {
-    const target = allItems.find((item) => item.value === tabMain);
-
-    return target.sub.map((item) => ({ ...item, label: target.label }));
-  };
 
   const addCart = (item) => {
     setCart([...cart, item]);
@@ -55,32 +49,8 @@ const Checkout = () => {
     cart.map((item) => item.price).reduce((prev, curt) => prev + curt, 0);
 
   return (
-    <div className="checkout">
-      <Radio.Group
-        className="mainTab"
-        size="large"
-        options={allItems}
-        onChange={(e) => {
-          setTabMain(e.target.value);
-        }}
-        value={tabMain}
-        optionType="button"
-        buttonStyle="solid"
-      />
-
-      <div className="subTab">
-        {tabSubMenu().map((item) => (
-          <Button
-            key={item.id}
-            className="btn"
-            size="large"
-            onClick={() => addCart(item)}
-          >
-            <span className="mr-auto">{item.subName}</span>
-            <span>{item.price} 元</span>
-          </Button>
-        ))}
-      </div>
+    <div id="Checkout">
+      <StockList addCart={addCart} />
 
       <div className="cartPanel" ref={cartPanel}>
         {cart.map((item, index) => (

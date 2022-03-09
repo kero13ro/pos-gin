@@ -8,7 +8,7 @@ import "antd/dist/antd.min.css";
 function App() {
   return (
     <div className="app">
-      <Header className="header"></Header>
+      <Header></Header>
       <Outlet />
     </div>
   );
