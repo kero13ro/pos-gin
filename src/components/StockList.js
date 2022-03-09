@@ -28,7 +28,7 @@ export default function StockList({ addCart }) {
       <div className="subTab">
         {tabSubMenu().map((item) => (
           <Button
-            key={item.id}
+            key={item.cid}
             className="flex"
             size="large"
             onClick={() => addCart(item)}

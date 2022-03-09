@@ -6,11 +6,30 @@
   border: 1px solid #ddd;
 }
 
+#Restock,
 #Checkout {
   height: calc(100% - 46px);
   display: grid;
   grid-template-rows: 1fr 1fr 45px;
   background-color: #f9f9f9;
+
+  .deleteBtn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    transform: scale(0.6);
+  }
+
+  .restockList {
+    padding: 8px 18px 8px 14px;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    .info {
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+    }
+  }
   
   .cartPanel {
     border-top: 1px solid #ccc;
@@ -38,16 +57,6 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ccc;
-  }
-
-  .restockList {
-    padding: 12px;
-    border-bottom: 1px solid #ccc;
-    .info {
-      margin-top: 5px;
-      display: flex;
-      align-items: center;
-    }
   }
   
   .previewList {

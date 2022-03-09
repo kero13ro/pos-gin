@@ -6,6 +6,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import StockList from "./StockList";
 import ConfirmModal from "./ConfirmModal";
 import { axiosIns } from "../utilities/axios";
+import { scrollBottom } from "../utilities/func";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
@@ -14,13 +15,7 @@ const Checkout = () => {
   const addCart = (item) => {
     setCart([...cart, item]);
 
-    setTimeout(() => {
-      cartPanel.current.scrollTo({
-        left: 0,
-        top: cartPanel.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }, 1);
+    scrollBottom(cartPanel);
   };
 
   const removeCart = (index) => {

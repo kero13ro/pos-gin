@@ -5,6 +5,18 @@
 - 考量 auth 驗證問題，前後端分離，另外部署至 heroku。
   ![google sheet](./src/static/sheet.png)
 
+<br>
+
+## Product Requirement Document
+
+- 入庫：從物業收貨時，紀錄商品入庫資訊，包括品項、數量、即期日
+- 結帳：客戶購買商品時，紀錄銷售資訊
+- 查詢：
+  - 當前庫存數量
+  - 當日結帳清單、營收，可切換日期區間
+
+<br>
+
 ## Todo
 
 - [x] 結帳：可選擇各品項、統整金額和數量
