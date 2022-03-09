@@ -1,3 +1,10 @@
+// const itemDetail = {
+//   id: 101,
+//   subName: "杯裝(700ml)",
+//   price: 30,
+//   expiryDate: "2022-10-12",
+// };
+
 const allItems = [
   {
     label: "無糖豆漿",

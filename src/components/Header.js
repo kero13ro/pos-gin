@@ -35,7 +35,7 @@ export default function Header() {
         <Link to="/">結帳</Link>
       </Menu.Item>
       <Menu.Item key="app" icon={<AppstoreOutlined />}>
-        <Link to="/restock">結帳</Link>
+        <Link to="/restock">入庫</Link>
       </Menu.Item>
       <Menu.Item key="app2" icon={<SearchOutlined onClick={getAll} disabled />}>
         查詢

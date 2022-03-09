@@ -39,6 +39,16 @@
     align-items: center;
     border-bottom: 1px solid #ccc;
   }
+
+  .restockList {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    .info {
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+    }
+  }
   
   .previewList {
     height: 40px;
