@@ -1,12 +1,11 @@
 import React, { useState, useRef } from "react";
-import ConfirmModal from "./ConfirmModal";
+import dayjs from "dayjs";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
-// import { allItems } from "../data/category";
 import StockList from "./StockList";
+import ConfirmModal from "./ConfirmModal";
 import { axiosIns } from "../utilities/axios";
-import dayjs from "dayjs";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);

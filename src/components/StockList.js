@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Radio, Button } from "antd";
-import { allItems } from "../data/category";
+import { allItems } from "../constants/category";
 
 export default function StockList({ addCart }) {
   const [tabMain, setTabMain] = useState(100);
