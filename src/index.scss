@@ -1,7 +1,7 @@
-
 .ma-8 {
   margin: 8px;
 }
+
 .ma-16 {
   margin: 16px;
 }
@@ -9,9 +9,11 @@
 .mr-auto {
   margin-right: auto;
 }
+
 .mr-8 {
   margin-right: 8px;
 }
+
 .ml-8 {
   margin-left: 8px;
 }
@@ -19,7 +21,28 @@
 .flex {
   display: flex;
 }
+
 .flex-center {
   display: flex;
   align-items: center;
+}
+
+
+// ant component public
+.previewList {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.previewSum {
+  padding: 3px;
+  color: rgb(203, 21, 21);
+  font-weight: bold;
+  text-align: right;
+}
+
+.slash {
+  padding: 0 3px;
 }

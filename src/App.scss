@@ -10,7 +10,7 @@
 #Checkout {
   height: calc(100% - 46px);
   display: grid;
-  grid-template-rows: 1fr 1fr 45px;
+  grid-template-rows: 300px 1fr 45px;
   background-color: #f9f9f9;
 
   .deleteBtn {
@@ -20,29 +20,19 @@
     transform: scale(0.6);
   }
 
-  .restockList {
-    padding: 8px 18px 8px 14px;
-    border-bottom: 1px solid #ccc;
-    position: relative;
-    .info {
-      margin-top: 5px;
-      display: flex;
-      align-items: center;
-    }
-  }
-  
-  .cartPanel {
+  .selectedPanel {
     border-top: 1px solid #ccc;
     overflow: scroll;
   }
-  
+
   .footer {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(#ccc, 0.5);
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    > * {
+
+    >* {
       margin-right: 4px;
     }
 
@@ -51,49 +41,30 @@
     }
   }
 
+}
+
+#Checkout {
   .cartList {
-    padding: 10px;
+    position: relative;
+    padding: 8px 18px 8px 14px;
     height: 50px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ccc;
   }
-  
-  .previewList {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .previewSum {
-    padding: 3px;
-    color: rgb(203, 21, 21);
-    font-weight: bold;
-    text-align: right;
-  }
-  .slash {
-    padding: 0 3px;
-  }
 }
 
 
+#Restock {
+  .restockList {
+    position: relative;
+    padding: 8px 18px 8px 14px;
+    border-bottom: 1px solid #ccc;
 
-#StockList {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  height: 100%;
-  overflow: auto;
-
-  .mainTab {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-  }
-  
-  .subTab {
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid #ccc;
+    .info {
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+    }
   }
 }

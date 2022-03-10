@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Radio, Button } from "antd";
+import styled from "@emotion/styled";
 import { allItems } from "../constants/category";
 
 export default function StockList({ handleAddList }) {
   const [tabMain, setTabMain] = useState(allItems[0]);
 
   return (
-    <div id="StockList">
+    <Root>
       <Radio.Group
         className="mainTab"
         size="large"
@@ -39,6 +40,19 @@ export default function StockList({ handleAddList }) {
           </Button>
         ))}
       </div>
-    </div>
+    </Root>
   );
 }
+
+const Root = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  background-color: #eee;
+
+  .mainTab,
+  .subTab {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+`;

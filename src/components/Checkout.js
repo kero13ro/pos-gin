@@ -10,12 +10,12 @@ import { sumPrice, scrollBottom } from "../utilities/func";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
-  const cartPanel = useRef(null);
+  const selectedPanel = useRef(null);
 
   const handleAddList = (item) => {
     setCart([...cart, item]);
 
-    scrollBottom(cartPanel);
+    scrollBottom(selectedPanel);
   };
 
   const handleSubmit = async () => {
@@ -31,17 +31,18 @@ const Checkout = () => {
     <div id="Checkout">
       <StockList handleAddList={handleAddList} />
 
-      <div className="cartPanel" ref={cartPanel}>
+      <div className="selectedPanel" ref={selectedPanel}>
         {cart.map((item, index) => (
           <div className="cartList" key={index}>
             <div className="mr-auto">{item.type}</div>
             {item.price}元<div className="slash"> / </div>
             {item.cat}
             <Button
+              className="deleteBtn"
+              shape="circle"
               onClick={() => {
                 setCart(cart.filter((_, index2) => index !== index2));
               }}
-              type="link"
               danger
               icon={<CloseOutlined />}
               size="small"

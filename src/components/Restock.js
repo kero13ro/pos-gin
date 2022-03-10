@@ -11,7 +11,7 @@ import { useImmer } from "use-immer";
 
 const Restock = () => {
   const [stock, updateStock] = useImmer([]);
-  const cartPanel = useRef(null);
+  const selectedPanel = useRef(null);
 
   const handleAddList = (item) => {
     const fullItem = {
@@ -22,7 +22,7 @@ const Restock = () => {
 
     updateStock([...stock, fullItem]);
 
-    scrollBottom(cartPanel);
+    scrollBottom(selectedPanel);
   };
 
   const handleSubmit = async () => {
@@ -41,7 +41,7 @@ const Restock = () => {
     <div id="Restock">
       <StockList handleAddList={handleAddList} />
 
-      <div className="cartPanel" ref={cartPanel}>
+      <div className="selectedPanel" ref={selectedPanel}>
         {stock.map((item, index) => (
           <div className="restockList" key={index}>
             <div className="flex-center">
