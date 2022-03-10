@@ -36,8 +36,8 @@ export default function Header() {
       <Menu.Item key="/checkout" icon={<ShoppingCartOutlined />}>
         <Link to="/checkout">結帳</Link>
       </Menu.Item>
-      <Menu.Item key="/restock" icon={<AppstoreOutlined />}>
-        <Link to="/restock">入庫</Link>
+      <Menu.Item key="/" icon={<AppstoreOutlined />}>
+        <Link to="/">入庫</Link>
       </Menu.Item>
       <Menu.Item key="app2" icon={<SearchOutlined onClick={getAll} disabled />}>
         查詢

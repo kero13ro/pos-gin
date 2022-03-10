@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import dayjs from "dayjs";
+import moment from "moment";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
@@ -20,7 +20,7 @@ const Checkout = () => {
 
   const handleSubmit = async () => {
     const params = {
-      created: dayjs().format("YY/MM/DDTHH:mm"),
+      created: moment().format("YY/MM/DDTHH:mm"),
       list: cart,
     };
 

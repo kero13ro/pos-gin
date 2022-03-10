@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import dayjs from "dayjs";
 import moment from "moment";
 import { Button, DatePicker, InputNumber } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
@@ -28,7 +27,7 @@ const Restock = () => {
 
   const handleSubmit = async () => {
     const params = {
-      created: dayjs().format("YY/MM/DDTHH:mm"),
+      created: moment().format("YY/MM/DDTHH:mm"),
       list: stock.map((item) => ({
         ...item,
         expiry: item.expiry.format("YYYY-DD-MM"),
@@ -46,7 +45,7 @@ const Restock = () => {
         {stock.map((item, index) => (
           <div className="restockList" key={index}>
             <div className="flex-center">
-              <div className="mr-auto">{item.label}</div>
+              <div className="mr-auto">{item.type}</div>
               {item.price}元<div className="slash"> / </div>
               {item.cat}
               <Button

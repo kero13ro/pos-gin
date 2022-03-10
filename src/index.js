@@ -12,7 +12,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="restock" element={<Restock />} />
+        <Route path="/" element={<Restock />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<p className="ma-16">網址輸入錯誤</p>} />
       </Route>
