@@ -11,53 +11,49 @@ import { sumPrice, scrollBottom } from "../utilities/func";
 import { useImmer } from "use-immer";
 
 const Restock = () => {
-  const [cart, updateCart] = useImmer([]);
+  const [stock, updateStock] = useImmer([]);
   const cartPanel = useRef(null);
 
-  const addCart = (item) => {
+  const handleAddList = (item) => {
     const fullItem = {
       ...item,
       count: 5,
-      expiryDate: moment().add(7, "day"),
+      expiry: moment().add(7, "day"),
     };
 
-    updateCart([...cart, fullItem]);
+    updateStock([...stock, fullItem]);
 
     scrollBottom(cartPanel);
   };
 
-  const submitCart = async () => {
-    let res;
+  const handleSubmit = async () => {
     const params = {
-      date: new Date().toLocaleDateString(),
-      time: dayjs().format("HH:mm:ss"),
-      cart,
+      created: dayjs().format("YY/MM/DDTHH:mm"),
+      list: stock.map((item) => ({
+        ...item,
+        expiry: item.expiry.format("YYYY-DD-MM"),
+      })),
     };
-    try {
-      res = await axiosIns.post("add", params);
-    } catch (error) {
-      return Promise.reject(error);
-    }
 
-    return Promise.resolve(res);
+    return axiosIns.post("addRowsAt?sheetName=stock", params);
   };
 
   return (
     <div id="Restock">
-      <StockList addCart={addCart} />
+      <StockList handleAddList={handleAddList} />
 
       <div className="cartPanel" ref={cartPanel}>
-        {cart.map((item, index) => (
+        {stock.map((item, index) => (
           <div className="restockList" key={index}>
             <div className="flex-center">
               <div className="mr-auto">{item.label}</div>
               {item.price}元<div className="slash"> / </div>
-              {item.subName}
+              {item.cat}
               <Button
                 className="deleteBtn"
                 shape="circle"
                 onClick={() => {
-                  updateCart(cart.filter((_, index2) => index !== index2));
+                  updateStock(stock.filter((_, index2) => index !== index2));
                 }}
                 danger
                 icon={<CloseOutlined />}
@@ -67,10 +63,10 @@ const Restock = () => {
             <div className="info">
               即期日期：
               <DatePicker
-                value={item.expiryDate}
+                value={item.expiry}
                 onChange={(date) =>
-                  updateCart((draft) => {
-                    draft[index].expiryDate = date;
+                  updateStock((draft) => {
+                    draft[index].expiry = date;
                   })
                 }
               />
@@ -80,7 +76,7 @@ const Restock = () => {
                 max={20}
                 value={item.count}
                 onChange={(date) =>
-                  updateCart((draft) => {
+                  updateStock((draft) => {
                     draft[index].count = date;
                   })
                 }
@@ -92,27 +88,27 @@ const Restock = () => {
       </div>
       <div className="footer">
         <span>總金額</span>
-        <span>{sumPrice(cart)}</span>
+        <span>{sumPrice(stock)}</span>
         <span>元</span>
 
         <span>/ 共 </span>
-        <span>{cart.length}</span>
+        <span>{stock.length}</span>
         <span>瓶</span>
 
         <ConfirmModal
-          submitCart={submitCart}
-          disabled={!cart.length}
-          clearCart={() => updateCart([])}
+          handleSubmit={handleSubmit}
+          disabled={!stock.length}
+          clearCart={() => updateStock([])}
         >
-          {cart.map((item, index) => (
+          {stock.map((item, index) => (
             <div className="previewList" key={index}>
               <div className="mr-auto">{item.label}</div>
               {item.price}元<div className="slash"> / </div>
-              {item.subName}
+              {item.cat}
             </div>
           ))}
 
-          <div className="previewSum">{sumPrice(cart)}元</div>
+          <div className="previewSum">{sumPrice(stock)}元</div>
         </ConfirmModal>
       </div>
     </div>

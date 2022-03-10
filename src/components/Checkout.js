@@ -6,54 +6,41 @@ import { CloseOutlined } from "@ant-design/icons";
 import StockList from "./StockList";
 import ConfirmModal from "./ConfirmModal";
 import { axiosIns } from "../utilities/axios";
-import { scrollBottom } from "../utilities/func";
+import { sumPrice, scrollBottom } from "../utilities/func";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
   const cartPanel = useRef(null);
 
-  const addCart = (item) => {
+  const handleAddList = (item) => {
     setCart([...cart, item]);
 
     scrollBottom(cartPanel);
   };
 
-  const removeCart = (index) => {
-    const arr = cart.filter((_, index2) => index !== index2);
-    setCart(arr);
-  };
-
-  const submitCart = async () => {
-    let res;
+  const handleSubmit = async () => {
     const params = {
-      date: new Date().toLocaleDateString(),
-      time: dayjs().format("HH:mm:ss"),
-      cart,
+      created: dayjs().format("YY/MM/DDTHH:mm"),
+      list: cart,
     };
-    try {
-      res = await axiosIns.post("add", params);
-    } catch (error) {
-      return Promise.reject(error);
-    }
 
-    return Promise.resolve(res);
+    return axiosIns.post("addRowsAt?sheetName=check", params);
   };
-
-  const cartSum = () =>
-    cart.map((item) => item.price).reduce((prev, curt) => prev + curt, 0);
 
   return (
     <div id="Checkout">
-      <StockList addCart={addCart} />
+      <StockList handleAddList={handleAddList} />
 
       <div className="cartPanel" ref={cartPanel}>
         {cart.map((item, index) => (
           <div className="cartList" key={index}>
-            <div className="mr-auto">{item.label}</div>
+            <div className="mr-auto">{item.type}</div>
             {item.price}元<div className="slash"> / </div>
-            {item.subName}
+            {item.cat}
             <Button
-              onClick={() => removeCart(index)}
+              onClick={() => {
+                setCart(cart.filter((_, index2) => index !== index2));
+              }}
               type="link"
               danger
               icon={<CloseOutlined />}
@@ -64,7 +51,7 @@ const Checkout = () => {
       </div>
       <div className="footer">
         <span>總金額</span>
-        <span>{cartSum()}</span>
+        <span>{sumPrice(cart)}</span>
         <span>元</span>
 
         <span>/ 共 </span>
@@ -72,19 +59,19 @@ const Checkout = () => {
         <span>瓶</span>
 
         <ConfirmModal
-          submitCart={submitCart}
+          handleSubmit={handleSubmit}
           disabled={!cart.length}
           clearCart={() => setCart([])}
         >
           {cart.map((item, index) => (
             <div className="previewList" key={index}>
-              <div className="mr-auto">{item.label}</div>
+              <div className="mr-auto">{item.type}</div>
               {item.price}元<div className="slash"> / </div>
-              {item.subName}
+              {item.cat}
             </div>
           ))}
 
-          <div className="previewSum">{cartSum()}元</div>
+          <div className="previewSum">{sumPrice(cart)}元</div>
         </ConfirmModal>
       </div>
     </div>

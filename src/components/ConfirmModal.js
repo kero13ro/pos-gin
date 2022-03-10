@@ -9,7 +9,7 @@ export default function ConfirmModal(props) {
     setConfirmLoading(true);
 
     try {
-      await props.submitCart();
+      await props.handleSubmit();
     } catch (error) {
       message.info("伺服器錯誤: " + error);
     }
