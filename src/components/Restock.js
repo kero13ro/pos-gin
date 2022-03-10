@@ -45,8 +45,7 @@ const Restock = () => {
         {stock.map((item, index) => (
           <div className="restockList" key={index}>
             <div className="flex-center">
-              <div className="mr-auto">{item.type}</div>
-              {item.price}元<div className="slash"> / </div>
+              <b className="mr-8">{item.type}</b>
               {item.cat}
               <Button
                 className="deleteBtn"
@@ -86,11 +85,7 @@ const Restock = () => {
         ))}
       </div>
       <div className="footer">
-        <span>總金額</span>
-        <span>{sumPrice(stock)}</span>
-        <span>元</span>
-
-        <span>/ 共 </span>
+        <span>共 </span>
         <span>{stock.length}</span>
         <span>瓶</span>
 
