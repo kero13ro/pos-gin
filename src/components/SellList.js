@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { Radio, Button } from "antd";
 import styled from "@emotion/styled";
-import { TypeList } from "../utilities/constants";
+import { StockList, TypeList } from "../utilities/constants";
 
-export default function StockList({ handleAddList }) {
+export default function SellList({ handleAddList, stockList }) {
   const [tabMain, setTabMain] = useState(TypeList[0]);
+
+  const displayList = tabMain.sub.map((item) => {
+    return {
+      ...item,
+      inventory: stockList.find((sk) => sk.cid === item.cid)?.count || 0,
+    };
+  });
 
   return (
     <Root>
@@ -23,10 +30,10 @@ export default function StockList({ handleAddList }) {
       </Radio.Group>
 
       <div className="subTab">
-        {tabMain.sub.map((item) => (
+        {displayList.map((item) => (
           <Button
+            disabled={item.inventory === 0}
             key={item.cid}
-            className="flex"
             size="large"
             onClick={() =>
               handleAddList({
@@ -35,8 +42,17 @@ export default function StockList({ handleAddList }) {
               })
             }
           >
-            <span className="mr-auto">{item.cat}</span>
-            <span>{item.price} 元</span>
+            <div className="flex">
+              <span className="mr-auto">{item.cat}</span>
+              <span className="mr-8">{item.price} 元</span>
+              <span
+                className={
+                  item.inventory === 0 ? "inventory error" : "inventory"
+                }
+              >
+                {item.inventory}瓶
+              </span>
+            </div>
           </Button>
         ))}
       </div>
@@ -54,5 +70,15 @@ const Root = styled.div`
     overflow: auto;
     display: flex;
     flex-direction: column;
+  }
+
+  .inventory {
+    border-radius: 5px;
+    background-color: #1f9b1f;
+    color: #fff;
+    padding: 0 6px;
+  }
+  .error {
+    background-color: #c82424;
   }
 `;

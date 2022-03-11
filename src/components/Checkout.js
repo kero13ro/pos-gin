@@ -2,18 +2,25 @@ import React, { useState, useRef } from "react";
 import moment from "moment";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import { useImmer } from "use-immer";
 
-import StockList from "./StockList";
+import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
 import { axiosIns } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
+import { StockList } from "../utilities/constants";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
   const selectedPanel = useRef(null);
+  const [stockList, updateStockList] = useImmer(StockList);
 
   const handleAddList = (item) => {
     setCart([...cart, item]);
+
+    updateStockList((list) => {
+      list.find((sk) => sk.cid === item.cid).count--;
+    });
 
     scrollBottom(selectedPanel);
   };
@@ -29,7 +36,7 @@ const Checkout = () => {
 
   return (
     <div id="Checkout">
-      <StockList handleAddList={handleAddList} />
+      <SellList handleAddList={handleAddList} stockList={stockList} />
 
       <div className="selectedPanel" ref={selectedPanel}>
         {cart.map((item, index) => (
@@ -41,6 +48,10 @@ const Checkout = () => {
               className="deleteBtn"
               shape="circle"
               onClick={() => {
+                updateStockList((list) => {
+                  list.find((sk) => sk.cid === item.cid).count++;
+                });
+
                 setCart(cart.filter((_, index2) => index !== index2));
               }}
               danger

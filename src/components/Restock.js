@@ -30,7 +30,7 @@ const Restock = () => {
       created: moment().format("YY/MM/DDTHH:mm"),
       list: stock.map((item) => ({
         ...item,
-        expiry: item.expiry.format("YYYY-DD-MM"),
+        expiry: item.expiry.format("YYYY/MM/DD"),
       })),
     };
 

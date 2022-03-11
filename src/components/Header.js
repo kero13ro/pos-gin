@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu } from "antd";
 import {
   SearchOutlined,
@@ -6,7 +6,7 @@ import {
   ShoppingCartOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { notification } from "antd";
 import { axiosIns } from "../utilities/axios";
 
@@ -18,16 +18,22 @@ export default function Header() {
     setCurrent(e.key);
   };
 
+  // useEffect(() => {
+  //   axiosIns.get("all?sheetName=stock").then((res) => {
+  //     console.log(res.data);
+  //   });
+  // }, []);
+
   const getAll = () => {
-    axiosIns.get("all").then((res) => {
-      // message.info(res.data);
-      notification.open({
-        message: "全部庫存",
-        description: res.data,
-        onClick: () => {
-          console.log("Notification Clicked!");
-        },
-      });
+    axiosIns.get("all?sheetName=stock").then((res) => {
+      console.log(res.data);
+      // notification.open({
+      //   message: "全部庫存",
+      //   description: res.data,
+      //   onClick: () => {
+      //     console.log("Notification Clicked!");
+      //   },
+      // });
     });
   };
 
