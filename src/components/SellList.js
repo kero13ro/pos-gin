@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Radio, Button } from "antd";
 import styled from "@emotion/styled";
-import { StockList, TypeList } from "../utilities/constants";
+import { TypeList } from "../utilities/constants";
 
 export default function SellList({ handleAddList, stockList }) {
   const [tabMain, setTabMain] = useState(TypeList[0]);
@@ -10,6 +10,7 @@ export default function SellList({ handleAddList, stockList }) {
     return {
       ...item,
       inventory: stockList.find((sk) => sk.cid === item.cid)?.count || 0,
+      expiry: stockList.find((sk) => sk.cid === item.cid)?.expiry || "",
     };
   });
 
@@ -42,15 +43,19 @@ export default function SellList({ handleAddList, stockList }) {
               })
             }
           >
-            <div className="flex">
-              <span className="mr-auto">{item.cat}</span>
-              <span className="mr-8">{item.price} 元</span>
+            <div className="subBtn">
               <span
                 className={
                   item.inventory === 0 ? "inventory error" : "inventory"
                 }
               >
                 {item.inventory}瓶
+              </span>
+              <span className="mr-8"></span>
+              <span className="mr-auto">{item.cat}</span>
+              <span className="price">
+                <small className="expiry">{item.expiry.substring(5)}</small>
+                {item.price} 元
               </span>
             </div>
           </Button>
@@ -80,5 +85,23 @@ const Root = styled.div`
   }
   .error {
     background-color: #c82424;
+  }
+
+  .price {
+    display: flex;
+    line-height: 1;
+    flex-direction: column;
+    .expiry {
+      font-size: 10px;
+      margin-top: -3px;
+      margin-bottom: 3px;
+      color: #888;
+    }
+  }
+
+  .subBtn {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
   }
 `;

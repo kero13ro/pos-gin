@@ -41,21 +41,6 @@
     }
   }
 
-}
-
-#Checkout {
-  .cartList {
-    position: relative;
-    padding: 8px 18px 8px 14px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-  }
-}
-
-
-#Restock {
   .restockList {
     position: relative;
     padding: 8px 18px 8px 14px;
@@ -64,6 +49,7 @@
     .info {
       margin-top: 5px;
       display: flex;
+      font-size: 12px;
       align-items: center;
     }
   }

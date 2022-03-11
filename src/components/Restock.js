@@ -5,7 +5,7 @@ import { CloseOutlined } from "@ant-design/icons";
 
 import StockList from "./StockList";
 import ConfirmModal from "./ConfirmModal";
-import { axiosIns } from "../utilities/axios";
+import { MutateStock } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
 import { useImmer } from "use-immer";
 
@@ -26,15 +26,13 @@ const Restock = () => {
   };
 
   const handleSubmit = async () => {
-    const params = {
-      created: moment().format("YY/MM/DDTHH:mm"),
-      list: stock.map((item) => ({
-        ...item,
-        expiry: item.expiry.format("YYYY/MM/DD"),
-      })),
-    };
+    const list = stock.map((item) => ({
+      ...item,
+      isStock: 1,
+      expiry: item.expiry.format("YYYY/MM/DD"),
+    }));
 
-    return axiosIns.post("addRowsAt?sheetName=stock", params);
+    return MutateStock(list);
   };
 
   return (

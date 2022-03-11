@@ -1,22 +1,21 @@
-import React, { useState, useRef } from "react";
-import moment from "moment";
+import React, { useRef } from "react";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useImmer } from "use-immer";
 
 import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
-import { axiosIns } from "../utilities/axios";
+import { MutateStock } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
 import { StockList } from "../utilities/constants";
 
 const Checkout = () => {
-  const [cart, setCart] = useState([]);
-  const selectedPanel = useRef(null);
+  const [cart, updateCart] = useImmer([]);
   const [stockList, updateStockList] = useImmer(StockList);
+  const selectedPanel = useRef(null);
 
   const handleAddList = (item) => {
-    setCart([...cart, item]);
+    updateCart((cart) => [...cart, item]);
 
     updateStockList((list) => {
       list.find((sk) => sk.cid === item.cid).count--;
@@ -26,12 +25,25 @@ const Checkout = () => {
   };
 
   const handleSubmit = async () => {
-    const params = {
-      created: moment().format("YY/MM/DDTHH:mm"),
-      list: cart,
-    };
+    let list = [];
 
-    return axiosIns.post("addRowsAt?sheetName=check", params);
+    cart.forEach((item) => {
+      const sameExpiry = list.find(
+        (ob) => ob.cid === item.cid && ob.expiry === item.expiry
+      );
+
+      if (!sameExpiry) {
+        list.push({
+          ...item,
+          count: 1,
+          sold: item.price,
+        });
+      } else {
+        sameExpiry.count++;
+      }
+    });
+
+    return MutateStock(list);
   };
 
   return (
@@ -40,24 +52,30 @@ const Checkout = () => {
 
       <div className="selectedPanel" ref={selectedPanel}>
         {cart.map((item, index) => (
-          <div className="cartList" key={index}>
-            <div className="mr-auto">{item.type}</div>
-            {item.price}元<div className="slash"> / </div>
-            {item.cat}
-            <Button
-              className="deleteBtn"
-              shape="circle"
-              onClick={() => {
-                updateStockList((list) => {
-                  list.find((sk) => sk.cid === item.cid).count++;
-                });
+          <div className="restockList" key={index}>
+            <div className="flex-center">
+              <b className="mr-auto">{item.type}</b>
+              {item.price}元<div className="slash"> / </div>
+              <div className="mr-8">{item.cat}</div>
+              <Button
+                className="deleteBtn"
+                shape="circle"
+                onClick={() => {
+                  updateStockList((list) => {
+                    list.find((sk) => sk.cid === item.cid).count++;
+                  });
 
-                setCart(cart.filter((_, index2) => index !== index2));
-              }}
-              danger
-              icon={<CloseOutlined />}
-              size="small"
-            />
+                  updateCart(cart.filter((_, index2) => index !== index2));
+                }}
+                danger
+                icon={<CloseOutlined />}
+                size="small"
+              />
+            </div>
+            <div className="info">
+              即期日期：
+              {item.expiry}
+            </div>
           </div>
         ))}
       </div>
@@ -73,7 +91,7 @@ const Checkout = () => {
         <ConfirmModal
           handleSubmit={handleSubmit}
           disabled={!cart.length}
-          clearCart={() => setCart([])}
+          clearCart={() => updateCart([])}
         >
           {cart.map((item, index) => (
             <div className="previewList" key={index}>
