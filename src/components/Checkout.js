@@ -36,6 +36,7 @@ const Checkout = () => {
         list.push({
           ...item,
           count: 1,
+          status: 2,
           sold: item.price,
         });
       } else {

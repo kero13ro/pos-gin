@@ -1,3 +1,5 @@
+// status: 1 - 進貨 、2 - 出貨
+
 // sheet 1. 商品定義
 export const CategoryList = [
   { cid: "101", type: "無糖豆漿", cat: "杯裝(700ml)", price: 30 },
@@ -25,15 +27,15 @@ export const CategoryList = [
 
 const typeName = [...new Set(CategoryList.map((ob) => ob.type))];
 
-// 將所有商品分層，主類別、次類別
+// 將所有商品分層，主類別、次類別，提供 UI 使用
 export const TypeList = typeName.map((type) => ({
   type,
   sub: CategoryList.filter((item) => item.type === type),
 }));
 
-// sheet 2. 變動紀錄
+// sheet 2. 每日庫存紀錄。提供未來查詢
 
-// sheet 3. 當日庫存快照，以及當日變動
+// sheet 3. 當日原始庫存 + 變動紀錄。加總即是當前庫存
 export const StockListMock = [
   { cid: "102", count: 7, expiry: "2022/03/18" },
   { cid: "802", count: 5, expiry: "2022/03/18" },

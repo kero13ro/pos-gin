@@ -25,16 +25,7 @@ export default function Header() {
   // }, []);
 
   const getAll = () => {
-    axiosIns.get("all?sheetName=stock").then((res) => {
-      console.log(res.data);
-      // notification.open({
-      //   message: "全部庫存",
-      //   description: res.data,
-      //   onClick: () => {
-      //     console.log("Notification Clicked!");
-      //   },
-      // });
-    });
+    axiosIns.get("all?sheetName=stock").then((res) => {});
   };
 
   return (
