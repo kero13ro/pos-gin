@@ -5,6 +5,7 @@ import { CloseOutlined } from "@ant-design/icons";
 
 import StockList from "./StockList";
 import ConfirmModal from "./ConfirmModal";
+import NumberCtrl from "./NumberCtrl";
 import { MutateStock } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
 import { useImmer } from "use-immer";
@@ -67,10 +68,9 @@ const Restock = () => {
                 }
               />
               <div className="mr-auto"></div>
-              <InputNumber
-                min={1}
-                max={20}
-                value={item.count}
+              <NumberCtrl
+                count={item.count}
+                update={updateStock}
                 onChange={(date) =>
                   updateStock((draft) => {
                     draft[index].count = date;

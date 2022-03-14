@@ -46,3 +46,19 @@
 .slash {
   padding: 0 3px;
 }
+
+#NumberCtrl {
+  display: flex;
+
+  .ant-input-number {
+    width: 50px;
+    border-radius: 0px;
+  }
+
+  .ant-btn-sm {
+    height: auto;
+    border-radius: 0px;
+    border: none;
+    box-shadow: none;
+  }
+}
