@@ -1,17 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useImmer } from "use-immer";
 
 import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
-import { MutateStock } from "../utilities/axios";
+import { MutateStock, FetchStock } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
-import { StockList } from "../utilities/constants";
+// import { StockListMock } from "../utilities/constants";
 
 const Checkout = () => {
   const [cart, updateCart] = useImmer([]);
-  const [stockList, updateStockList] = useImmer(StockList);
+  const [stockList, updateStockList] = useImmer([]);
   const selectedPanel = useRef(null);
 
   const handleAddList = (item) => {
@@ -45,6 +45,10 @@ const Checkout = () => {
 
     return MutateStock(list);
   };
+
+  useEffect(() => {
+    FetchStock(updateStockList);
+  }, []);
 
   return (
     <div id="Checkout">

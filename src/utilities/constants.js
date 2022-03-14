@@ -1,29 +1,31 @@
 // sheet 1. 商品定義
 export const CategoryList = [
-  { cid: 101, type: "無糖豆漿", cat: "杯裝(700ml)", price: 30 },
-  { cid: 102, type: "無糖豆漿", cat: "罐裝(1500ml)", price: 60 },
-  { cid: 201, type: "微糖豆漿", cat: "杯裝(700ml)", price: 30 },
-  { cid: 202, type: "微糖豆漿", cat: "罐裝(1500ml)", price: 60 },
-  { cid: 301, type: "南瓜豆漿", cat: "杯裝(700ml)", price: 65 },
-  { cid: 302, type: "南瓜豆漿", cat: "罐裝(1000ml)", price: 80 },
-  { cid: 303, type: "南瓜豆漿", cat: "大罐裝(1500ml)", price: 120 },
-  { cid: 401, type: "青仁黑豆漿", cat: "杯裝(700ml)", price: 65 },
-  { cid: 402, type: "青仁黑豆漿", cat: "罐裝(1000ml)", price: 80 },
-  { cid: 501, type: "紅棗豆漿", cat: "杯裝(700ml)", price: 65 },
-  { cid: 502, type: "紅棗豆漿", cat: "罐裝(1000ml)", price: 80 },
-  { cid: 601, type: "烏龍紅茶豆漿", cat: "杯裝(700ml)", price: 65 },
-  { cid: 602, type: "烏龍紅茶豆漿", cat: "罐裝(1000ml)", price: 80 },
-  { cid: 603, type: "烏龍紅茶豆漿", cat: "大罐裝(1500ml)", price: 120 },
-  { cid: 701, type: "杏仁豆漿", cat: "杯裝(700ml)", price: 65 },
-  { cid: 702, type: "杏仁豆漿", cat: "罐裝(1000ml)", price: 80 },
-  { cid: 703, type: "杏仁豆漿", cat: "大罐裝(1500ml)", price: 120 },
-  { cid: 801, type: "黃豆製品", cat: "豆腐(4塊/盒)", price: 40 },
-  { cid: 802, type: "黃豆製品", cat: "油豆腐(8塊/盒)", price: 55 },
-  { cid: 803, type: "黃豆製品", cat: "凍豆腐(600克)", price: 65 },
-  { cid: 804, type: "黃豆製品", cat: "傳統豆花", price: 45 },
+  { cid: "101", type: "無糖豆漿", cat: "杯裝(700ml)", price: 30 },
+  { cid: "102", type: "無糖豆漿", cat: "罐裝(1500ml)", price: 60 },
+  { cid: "201", type: "微糖豆漿", cat: "杯裝(700ml)", price: 30 },
+  { cid: "202", type: "微糖豆漿", cat: "罐裝(1500ml)", price: 60 },
+  { cid: "301", type: "南瓜豆漿", cat: "杯裝(700ml)", price: 65 },
+  { cid: "302", type: "南瓜豆漿", cat: "罐裝(1000ml)", price: 80 },
+  { cid: "303", type: "南瓜豆漿", cat: "大罐裝(1500ml)", price: 120 },
+  { cid: "401", type: "青仁黑豆漿", cat: "杯裝(700ml)", price: 65 },
+  { cid: "402", type: "青仁黑豆漿", cat: "罐裝(1000ml)", price: 80 },
+  { cid: "501", type: "紅棗豆漿", cat: "杯裝(700ml)", price: 65 },
+  { cid: "502", type: "紅棗豆漿", cat: "罐裝(1000ml)", price: 80 },
+  { cid: "601", type: "烏龍紅茶豆漿", cat: "杯裝(700ml)", price: 65 },
+  { cid: "602", type: "烏龍紅茶豆漿", cat: "罐裝(1000ml)", price: 80 },
+  { cid: "603", type: "烏龍紅茶豆漿", cat: "大罐裝(1500ml)", price: 120 },
+  { cid: "701", type: "杏仁豆漿", cat: "杯裝(700ml)", price: 65 },
+  { cid: "702", type: "杏仁豆漿", cat: "罐裝(1000ml)", price: 80 },
+  { cid: "703", type: "杏仁豆漿", cat: "大罐裝(1500ml)", price: 120 },
+  { cid: "801", type: "黃豆製品", cat: "豆腐(4塊/盒)", price: 40 },
+  { cid: "802", type: "黃豆製品", cat: "油豆腐(8塊/盒)", price: 55 },
+  { cid: "803", type: "黃豆製品", cat: "凍豆腐(600克)", price: 65 },
+  { cid: "804", type: "黃豆製品", cat: "傳統豆花", price: 45 },
 ];
 
 const typeName = [...new Set(CategoryList.map((ob) => ob.type))];
+
+// 將所有商品分層，主類別、次類別
 export const TypeList = typeName.map((type) => ({
   type,
   sub: CategoryList.filter((item) => item.type === type),
@@ -31,12 +33,12 @@ export const TypeList = typeName.map((type) => ({
 
 // sheet 2. 變動紀錄
 
-// sheet 3. 當前庫存
-export const StockList = [
-  { cid: 102, count: 7, expiry: "2022/03/18" },
-  { cid: 802, count: 5, expiry: "2022/03/18" },
-  { cid: 702, count: 5, expiry: "2022/03/18" },
-  { cid: 402, count: 5, expiry: "2022/03/18" },
+// sheet 3. 當日庫存快照，以及當日變動
+export const StockListMock = [
+  { cid: "102", count: 7, expiry: "2022/03/18" },
+  { cid: "802", count: 5, expiry: "2022/03/18" },
+  { cid: "702", count: 5, expiry: "2022/03/18" },
+  { cid: "402", count: 5, expiry: "2022/03/18" },
 ];
 
 // export const allItems = [

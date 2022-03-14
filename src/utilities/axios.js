@@ -16,3 +16,10 @@ export function MutateStock(list) {
 
   axiosIns.post("addRowsAt?sheetName=stock", params);
 }
+
+// 抓取當日庫存
+export async function FetchStock(update) {
+  const { data } = await axiosIns.get("getStock?sheetName=stock");
+
+  update(data);
+}
