@@ -9,7 +9,7 @@ import Checkout from "./components/Checkout";
 import App from "./App";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/pos-gin">
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="/" element={<Restock />} />
