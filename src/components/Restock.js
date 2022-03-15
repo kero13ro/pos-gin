@@ -7,7 +7,7 @@ import StockList from "./StockList";
 import ConfirmModal from "./ConfirmModal";
 import NumberCtrl from "./NumberCtrl";
 import { MutateStock } from "../utilities/axios";
-import { sumPrice, scrollBottom } from "../utilities/func";
+import { scrollBottom } from "../utilities/func";
 import { useImmer } from "use-immer";
 
 const Restock = () => {
@@ -18,8 +18,17 @@ const Restock = () => {
     const fullItem = {
       ...item,
       count: 5,
-      expiry: moment().add(7, "day"),
+      expiry: moment().add(8, "day"),
     };
+
+    const index = stock.findIndex((ob) => ob.cid === item.cid);
+
+    if (index !== -1) {
+      updateStock((draft) => {
+        draft[index].count++;
+      });
+      return;
+    }
 
     updateStock([...stock, fullItem]);
 
@@ -102,16 +111,23 @@ const Restock = () => {
           handleSubmit={handleSubmit}
           disabled={!stock.length}
           clearCart={() => updateStock([])}
+          title="確認進貨"
         >
           {stock.map((item, index) => (
             <div className="previewList" key={index}>
               <div className="mr-auto">{item.label}</div>
               {item.price}元<div className="slash"> / </div>
-              {item.cat}
+              <div className="mr-8">{item.cat}</div>x {item.count}
             </div>
           ))}
 
-          <div className="previewSum">{sumPrice(stock)}元</div>
+          <div className="previewSum">
+            共
+            {stock
+              .map((item) => item.count)
+              .reduce((prev, curt) => prev + curt, 0)}
+            瓶
+          </div>
         </ConfirmModal>
       </div>
     </div>

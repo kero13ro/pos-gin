@@ -26,10 +26,10 @@ export default function ConfirmModal(props) {
         disabled={props.disabled}
         onClick={() => setVisible(true)}
       >
-        確認結帳
+        {props.title || "確認結帳"}
       </Button>
       <Modal
-        title="確認送單"
+        title={props.title || "確認結帳"}
         visible={visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
