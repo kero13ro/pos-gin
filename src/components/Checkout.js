@@ -54,7 +54,7 @@ const Checkout = () => {
       updateStockList(sorted);
     };
     fetchData();
-  }, []);
+  }, [updateStockList]);
 
   return (
     <div id="Checkout">

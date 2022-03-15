@@ -21,6 +21,7 @@
   }
 
   .selectedPanel {
+    padding: 0 10px;
     border-top: 1px solid #ccc;
     overflow: scroll;
   }
@@ -53,4 +54,10 @@
       align-items: center;
     }
   }
+}
+
+#Search {
+  overflow: auto;
+  height: calc(100% - 46px);
+  padding: 10px;
 }
