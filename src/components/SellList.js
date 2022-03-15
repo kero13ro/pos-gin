@@ -6,12 +6,17 @@ import { TypeList } from "../utilities/constants";
 export default function SellList({ handleAddList, stockList }) {
   const [tabMain, setTabMain] = useState(TypeList[0]);
 
-  const displayList = tabMain.sub.map((item) => {
-    return {
-      ...item,
-      inventory: stockList.find((sk) => sk.cid === item.cid)?.count || 0,
-      expiry: stockList.find((sk) => sk.cid === item.cid)?.expiry || "",
-    };
+  let displaySub = [];
+
+  tabMain.sub.forEach((defaultOb) => {
+    const arr = stockList.filter((ob2) => ob2.cid === defaultOb.cid);
+
+    if (arr.length === 0) {
+      displaySub.push({ ...defaultOb, count: 0, expiry: "" });
+    } else {
+      const addDetail = arr.map((ob) => ({ ...defaultOb, ...ob }));
+      displaySub.push(...addDetail);
+    }
   });
 
   return (
@@ -31,10 +36,10 @@ export default function SellList({ handleAddList, stockList }) {
       </Radio.Group>
 
       <div className="subTab">
-        {displayList.map((item) => (
+        {displaySub.map((item) => (
           <Button
-            disabled={item.inventory === 0}
-            key={item.cid}
+            disabled={item.count === 0}
+            key={item.cid + item.expiry}
             size="large"
             onClick={() =>
               handleAddList({
@@ -44,12 +49,8 @@ export default function SellList({ handleAddList, stockList }) {
             }
           >
             <div className="subBtn">
-              <span
-                className={
-                  item.inventory === 0 ? "inventory error" : "inventory"
-                }
-              >
-                {item.inventory}瓶
+              <span className={item.count === 0 ? "count error" : "count"}>
+                {item.count}瓶
               </span>
               <span className="mr-8"></span>
               <span className="mr-auto">{item.cat}</span>
@@ -77,7 +78,7 @@ const Root = styled.div`
     flex-direction: column;
   }
 
-  .inventory {
+  .count {
     border-radius: 5px;
     background-color: #1f9b1f;
     color: #fff;
