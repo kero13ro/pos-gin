@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Radio, Button } from "antd";
+import { Radio, Button, Spin } from "antd";
 import styled from "@emotion/styled";
 import { TypeList } from "../utilities/constants";
 
@@ -35,33 +35,35 @@ export default function SellList({ handleAddList, stockList }) {
         ))}
       </Radio.Group>
 
-      <div className="subTab">
-        {displaySub.map((item) => (
-          <Button
-            disabled={item.count === 0}
-            key={item.cid + item.expiry}
-            size="large"
-            onClick={() =>
-              handleAddList({
-                ...item,
-                type: tabMain.type,
-              })
-            }
-          >
-            <div className="subBtn">
-              <span className={item.count === 0 ? "count error" : "count"}>
-                {item.count}瓶
-              </span>
-              <span className="mr-8"></span>
-              <span className="mr-auto">{item.cat}</span>
-              <span className="price">
-                <small className="expiry">{item.expiry.substring(5)}</small>
-                {item.price} 元
-              </span>
-            </div>
-          </Button>
-        ))}
-      </div>
+      <Spin spinning={stockList.length === 0}>
+        <div className="subTab">
+          {displaySub.map((item) => (
+            <Button
+              disabled={item.count === 0}
+              key={item.cid + item.expiry}
+              size="large"
+              onClick={() =>
+                handleAddList({
+                  ...item,
+                  type: tabMain.type,
+                })
+              }
+            >
+              <div className="subBtn">
+                <span className={item.count === 0 ? "count error" : "count"}>
+                  {item.count}瓶
+                </span>
+                <span className="mr-8"></span>
+                <span className="mr-auto">{item.cat}</span>
+                <span className="price">
+                  <small className="expiry">{item.expiry.substring(5)}</small>
+                  {item.price} 元
+                </span>
+              </div>
+            </Button>
+          ))}
+        </div>
+      </Spin>
     </Root>
   );
 }
