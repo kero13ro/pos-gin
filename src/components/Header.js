@@ -24,8 +24,6 @@ export default function Header() {
   //   });
   // }, []);
 
-  console.log(new Date().getTime());
-
   const getAll = () => {
     axiosIns.get("all?sheetName=stock").then((res) => {});
   };
