@@ -60,6 +60,7 @@ const Restock = () => {
             <div className="info">
               即期日期：
               <DatePicker
+                inputReadOnly
                 value={item.expiry}
                 onChange={(date) =>
                   updateStock((draft) => {
