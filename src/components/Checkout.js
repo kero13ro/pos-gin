@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useImmer } from "use-immer";
+import moment from "moment";
 
 import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
@@ -83,8 +84,8 @@ const Checkout = () => {
               />
             </div>
             <div className="info">
-              即期日期：
-              {item.expiry}
+              即期日：
+              {moment(item.expiry).format("M/DD")}
             </div>
           </div>
         ))}

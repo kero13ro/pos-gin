@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import moment from "moment";
-import { Button, DatePicker, InputNumber } from "antd";
+import { Button, DatePicker } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
 import StockList from "./StockList";
@@ -58,7 +58,7 @@ const Restock = () => {
               />
             </div>
             <div className="info">
-              即期日期：
+              即期日：
               <DatePicker
                 inputReadOnly
                 value={item.expiry}

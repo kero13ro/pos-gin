@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Radio, Button, Spin } from "antd";
 import styled from "@emotion/styled";
+import moment from "moment";
 import { TypeList } from "../utilities/constants";
 
 export default function SellList({ handleAddList, stockList }) {
@@ -35,8 +36,8 @@ export default function SellList({ handleAddList, stockList }) {
         ))}
       </Radio.Group>
 
-      <Spin spinning={stockList.length === 0}>
-        <div className="subTab">
+      <div className="subTab">
+        <Spin spinning={stockList.length === 0}>
           {displaySub.map((item) => (
             <Button
               disabled={item.count === 0}
@@ -54,16 +55,20 @@ export default function SellList({ handleAddList, stockList }) {
                   {item.count}瓶
                 </span>
                 <span className="mr-8"></span>
-                <span className="mr-auto">{item.cat}</span>
-                <span className="price">
-                  <small className="expiry">{item.expiry.substring(5)}</small>
-                  {item.price} 元
+                <span className="mr-auto info">
+                  {item.cat}
+                  {item.expiry && (
+                    <small className="expiry gray fz12">
+                      {moment(item.expiry).format("M/DD")}
+                    </small>
+                  )}
                 </span>
+                <span className="price">{item.price} 元</span>
               </div>
             </Button>
           ))}
-        </div>
-      </Spin>
+        </Spin>
+      </div>
     </Root>
   );
 }
@@ -80,6 +85,14 @@ const Root = styled.div`
     flex-direction: column;
   }
 
+  .subTab {
+    .ant-btn-lg {
+      /* padding-top: 10px; */
+      height: 55px;
+      width: 100%;
+    }
+  }
+
   .count {
     border-radius: 5px;
     background-color: #1f9b1f;
@@ -90,16 +103,16 @@ const Root = styled.div`
     background-color: #c82424;
   }
 
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .price {
     display: flex;
-    line-height: 1;
     flex-direction: column;
-    .expiry {
-      font-size: 10px;
-      margin-top: -3px;
-      margin-bottom: 3px;
-      color: #888;
-    }
+    align-items: flex-start;
   }
 
   .subBtn {
