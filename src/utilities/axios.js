@@ -52,5 +52,7 @@ export function makeBalance(list) {
     }
   });
 
+  incomeListByUnique = incomeListByUnique.filter((ob) => ob.count !== 0);
+
   return incomeListByUnique;
 }

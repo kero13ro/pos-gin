@@ -7,7 +7,6 @@ import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
 import { MutateStock, FetchStock, makeBalance } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
-// import { StockListMock } from "../utilities/constants";
 
 const Checkout = () => {
   const [cart, updateCart] = useImmer([]);
@@ -18,7 +17,8 @@ const Checkout = () => {
     updateCart((cart) => [...cart, item]);
 
     updateStockList((list) => {
-      list.find((sk) => sk.cid === item.cid).count--;
+      list.find((ob) => ob.cid === item.cid && ob.expiry === item.expiry)
+        .count--;
     });
 
     scrollBottom(selectedPanel);
@@ -37,7 +37,7 @@ const Checkout = () => {
           ...item,
           count: 1,
           status: 2,
-          sold: item.price,
+          sold: item.price, // todo
         });
       } else {
         sameExpiry.count++;
