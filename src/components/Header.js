@@ -36,8 +36,8 @@ export default function Header() {
       <Menu.Item key="/" icon={<AppstoreOutlined />}>
         <Link to="/">入庫</Link>
       </Menu.Item>
-      <Menu.Item key="app2" icon={<SearchOutlined onClick={getAll} disabled />}>
-        查詢
+      <Menu.Item key="search" icon={<SearchOutlined />}>
+        <Link to="/search">查詢</Link>
       </Menu.Item>
       <Menu.Item key="app3" icon={<SettingOutlined />} disabled>
         設定

@@ -18,11 +18,14 @@ export function MutateStock(list) {
 }
 
 // 抓取當日庫存
-export async function FetchStock(update) {
+export async function FetchStock() {
   // google sheet API 匯出均為 string
   const { data } = await axiosIns.get("getStock?sheetName=stock");
-  const list = data.map((ob) => ({ ...ob, count: Number(ob.count) }));
+  return data.map((ob) => ({ ...ob, count: Number(ob.count) }));
+}
 
+// 平衡收支、返回當前剩餘庫存
+export function makeBalance(list) {
   // 1. 將入庫同類商品全部加總
   let incomeList = list.filter((ob) => ob.status === "1");
   let incomeListByUnique = [];
@@ -49,5 +52,5 @@ export async function FetchStock(update) {
     }
   });
 
-  update(incomeListByUnique);
+  return incomeListByUnique;
 }

@@ -5,7 +5,7 @@ import { useImmer } from "use-immer";
 
 import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
-import { MutateStock, FetchStock } from "../utilities/axios";
+import { MutateStock, FetchStock, makeBalance } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
 // import { StockListMock } from "../utilities/constants";
 
@@ -48,7 +48,12 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    FetchStock(updateStockList);
+    const fetchData = async () => {
+      const list = await FetchStock();
+      const sorted = makeBalance(list);
+      updateStockList(sorted);
+    };
+    fetchData();
   }, []);
 
   return (
