@@ -72,6 +72,16 @@ const Restock = () => {
               <NumberCtrl
                 count={item.count}
                 update={updateStock}
+                onAdd={() =>
+                  updateStock((draft) => {
+                    draft[index].count++;
+                  })
+                }
+                onMinus={() =>
+                  updateStock((draft) => {
+                    draft[index].count--;
+                  })
+                }
                 onChange={(date) =>
                   updateStock((draft) => {
                     draft[index].count = date;
