@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
@@ -12,11 +12,17 @@ import { sumPrice, scrollBottom } from "../utilities/func";
 
 const Checkout = () => {
   const stockListStore = useSelector((state) => state.stock.stockList);
-  const sorted = makeBalance(stockListStore);
 
-  const [stockList, updateStockList] = useImmer(sorted);
+  const [stockList, updateStockList] = useImmer([]);
   const [cart, updateCart] = useImmer([]);
   const selectedPanel = useRef(null);
+
+  useEffect(() => {
+    const sorted = makeBalance(stockListStore);
+
+    updateStockList(sorted);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stockListStore]);
 
   const handleAddList = (item) => {
     updateCart((cart) => [...cart, item]);

@@ -5,21 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "@emotion/styled";
 import { CategoryList } from "../utilities/constants";
-import useMutateStock from "../hook/useMutateStock";
 
 export default function Search() {
-  const { FetchSheet } = useMutateStock();
   const stockList = useSelector((state) => state.stock.stockList);
-
-  const fetchData = async () => {
-    if (stockList.length !== 0) return;
-
-    FetchSheet();
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const fullData = stockList.map((ob) => ({
     ...ob,
