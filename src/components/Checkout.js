@@ -1,19 +1,20 @@
 import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useImmer } from "use-immer";
+import { connect } from "react-redux";
+import moment from "moment";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
-import { useImmer } from "use-immer";
-import moment from "moment";
 
 import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
 import { MutateStock, makeBalance } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
 
-const Checkout = () => {
-  const stockListStore = useSelector((state) => state.stock.stockList);
-
+const Checkout = ({ stockListStore }) => {
+  // 暫存的目前庫存，若確定送出後再更新 store
   const [stockList, updateStockList] = useImmer([]);
+
+  // 暫存的結帳清單
   const [cart, updateCart] = useImmer([]);
   const selectedPanel = useRef(null);
 
@@ -121,4 +122,8 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+const mapStateToProps = (state) => ({
+  stockListStore: state.stock.stockList,
+});
+
+export default connect(mapStateToProps)(Checkout);
