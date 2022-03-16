@@ -74,7 +74,10 @@ export default function Search() {
     <div id="Search">
       <Table
         columns={columns}
-        dataSource={stockList}
+        dataSource={stockList.map((ob) => ({
+          ...ob,
+          key: `${ob.created}-${ob.cid}-${ob.status}`,
+        }))}
         size="small"
         pagination={false}
       ></Table>
