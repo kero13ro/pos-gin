@@ -1,23 +1,20 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Table, Tag } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "@emotion/styled";
-import { FetchStock } from "../utilities/axios";
 import { CategoryList } from "../utilities/constants";
-import { updateStock } from "../store/slice/stock";
+import useMutateStock from "../hook/useMutateStock";
 
 export default function Search() {
-  const dispatch = useDispatch();
+  const { FetchSheet } = useMutateStock();
   const stockList = useSelector((state) => state.stock.stockList);
 
   const fetchData = async () => {
     if (stockList.length !== 0) return;
 
-    FetchStock()
-      .then((data) => dispatch(updateStock(data)))
-      .catch((err) => console.log(err));
+    FetchSheet();
   };
 
   useEffect(() => {

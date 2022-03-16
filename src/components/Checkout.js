@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useImmer } from "use-immer";
@@ -49,7 +49,7 @@ const Checkout = () => {
       }
     });
 
-    return MutateStock(list);
+    await MutateStock(list);
   };
 
   return (
