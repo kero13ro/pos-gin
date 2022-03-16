@@ -13,14 +13,14 @@ export function MutateStock(list) {
     created: moment().format("YYYY/MM/DD-HH:mm"),
     list,
   };
-
-  axiosIns.post("addRowsAt?sheetName=stock", params);
+  return axiosIns.post("addRowsAt?sheetName=stock", params);
 }
 
 // 抓取當日庫存
-export async function FetchStock(signal) {
+export async function FetchStock() {
   // google sheet API 匯出均為 string
-  const { data } = await axiosIns.get("getStock?sheetName=stock", { signal });
+  const { data } = await axiosIns.get("getStock?sheetName=stock");
+
   return data.map((ob) => ({ ...ob, count: Number(ob.count) }));
 }
 
@@ -34,7 +34,7 @@ export function makeBalance(list) {
       (ob2) => ob1.cid === ob2.cid && ob1.expiry === ob2.expiry
     );
     if (!target) {
-      incomeListByUnique.push(ob1);
+      incomeListByUnique.push({ ...ob1 });
     } else {
       target.count = target.count + ob1.count;
     }

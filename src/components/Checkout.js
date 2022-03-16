@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useImmer } from "use-immer";
@@ -6,12 +7,15 @@ import moment from "moment";
 
 import SellList from "./SellList";
 import ConfirmModal from "./ConfirmModal";
-import { MutateStock, FetchStock, makeBalance } from "../utilities/axios";
+import { MutateStock, makeBalance } from "../utilities/axios";
 import { sumPrice, scrollBottom } from "../utilities/func";
 
 const Checkout = () => {
+  const stockListStore = useSelector((state) => state.stock.stockList);
+  const sorted = makeBalance(stockListStore);
+
+  const [stockList, updateStockList] = useImmer(sorted);
   const [cart, updateCart] = useImmer([]);
-  const [stockList, updateStockList] = useImmer([]);
   const selectedPanel = useRef(null);
 
   const handleAddList = (item) => {
@@ -47,26 +51,6 @@ const Checkout = () => {
 
     return MutateStock(list);
   };
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchData = async () => {
-      FetchStock(controller.signal)
-        .then((list) => {
-          const sorted = makeBalance(list);
-          updateStockList(sorted);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    fetchData();
-
-    return () => {
-      controller.abort();
-    };
-  }, [updateStockList]);
 
   return (
     <div id="Checkout">

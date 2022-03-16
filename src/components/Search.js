@@ -1,13 +1,66 @@
 import React, { useEffect } from "react";
-import { useImmer } from "use-immer";
+import { useSelector, useDispatch } from "react-redux";
 import { Table, Tag } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "@emotion/styled";
 import { FetchStock } from "../utilities/axios";
 import { CategoryList } from "../utilities/constants";
+import { updateStock } from "../store/slice/stock";
 
-const columns = [
+export default function Search() {
+  const dispatch = useDispatch();
+  const stockList = useSelector((state) => state.stock.stockList);
+
+  const fetchData = async () => {
+    if (stockList.length !== 0) return;
+
+    FetchStock()
+      .then((data) => dispatch(updateStock(data)))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fullData = stockList.map((ob) => ({
+    ...ob,
+    ...CategoryList.find((ob2) => ob.cid === ob2.cid),
+    key: uuidv4(),
+  }));
+
+  const dailyVolume = () =>
+    fullData.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
+
+  // const dailyOut = () =>
+  //   fullData.map((ob) => Number(ob.count) || 0).reduce((a, b) => a + b, 0);
+
+  return (
+    <div id="Search">
+      <Table
+        columns={TableColumns}
+        dataSource={fullData}
+        size="small"
+        pagination={false}
+        footer={() => {
+          return (
+            <Footer>
+              {/* <span>{dailyOut()}</span> */}
+              今日營業額：{dailyVolume()}
+            </Footer>
+          );
+        }}
+      ></Table>
+    </div>
+  );
+}
+
+const Footer = styled.div`
+  text-align: right;
+`;
+
+const TableColumns = [
   {
     title: "時間",
     dataIndex: "created",
@@ -63,55 +116,3 @@ const columns = [
     ),
   },
 ];
-
-export default function Search() {
-  const [stockList, updateStockList] = useImmer([]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchData = async () => {
-      FetchStock(controller.signal)
-        .then((list) => {
-          list = list.map((ob) => ({
-            ...ob,
-            ...CategoryList.find((ob2) => ob.cid === ob2.cid),
-          }));
-
-          updateStockList(list);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    fetchData();
-
-    return () => {
-      controller.abort();
-    };
-  }, [updateStockList]);
-
-  const dailyVolume = () =>
-    stockList.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
-
-  return (
-    <div id="Search">
-      <Table
-        columns={columns}
-        dataSource={stockList.map((ob) => ({
-          ...ob,
-          key: uuidv4(),
-        }))}
-        size="small"
-        pagination={false}
-        footer={() => {
-          return <Footer>今日營業額：{dailyVolume()}</Footer>;
-        }}
-      ></Table>
-    </div>
-  );
-}
-
-const Footer = styled.div`
-  text-align: right;
-`;
