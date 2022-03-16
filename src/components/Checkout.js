@@ -49,12 +49,23 @@ const Checkout = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchData = async () => {
-      const list = await FetchStock();
-      const sorted = makeBalance(list);
-      updateStockList(sorted);
+      FetchStock(controller.signal)
+        .then((list) => {
+          const sorted = makeBalance(list);
+          updateStockList(sorted);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [updateStockList]);
 
   return (

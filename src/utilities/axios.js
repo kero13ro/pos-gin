@@ -18,9 +18,9 @@ export function MutateStock(list) {
 }
 
 // 抓取當日庫存
-export async function FetchStock() {
+export async function FetchStock(signal) {
   // google sheet API 匯出均為 string
-  const { data } = await axiosIns.get("getStock?sheetName=stock");
+  const { data } = await axiosIns.get("getStock?sheetName=stock", { signal });
   return data.map((ob) => ({ ...ob, count: Number(ob.count) }));
 }
 

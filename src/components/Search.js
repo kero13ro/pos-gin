@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import { Table, Tag } from "antd";
 import { FetchStock } from "../utilities/axios";
@@ -54,20 +54,28 @@ const columns = [
 export default function Search() {
   const [stockList, updateStockList] = useImmer([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const controller = new AbortController();
+
     const fetchData = async () => {
-      let list = await FetchStock();
+      FetchStock(controller.signal)
+        .then((list) => {
+          list = list.map((ob) => ({
+            ...ob,
+            ...CategoryList.find((ob2) => ob.cid === ob2.cid),
+          }));
 
-      list = list.map((ob) => ({
-        ...ob,
-        ...CategoryList.find((ob2) => ob.cid === ob2.cid),
-      }));
-
-      updateStockList(list);
-
-      console.log({ list });
+          updateStockList(list);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [updateStockList]);
 
   return (

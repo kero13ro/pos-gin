@@ -16,9 +16,12 @@
 ## Tech Stack
 
 - 使用 React Ant Design UI 建置庫存管理、進貨等功能。
-- 使用 express, google sheet 做為資料庫。
-- 考量 auth 驗證問題，前後端分離，另外部署至 heroku。
-- <img src="./src/static/sheet2.png" width="350">
+- 使用 Express.js, Google Sheet 做為資料庫。
+  <div >
+    <img src="./src/static/sheet2.png" width="350">
+  </div >
+- 前後端分離，後端另外部署至 heroku。
+- 在切換頁面時，使用 AbortController 取消撈取 API。
 
 <br>
 
