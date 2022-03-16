@@ -111,7 +111,7 @@ const Restock = () => {
           handleSubmit={handleSubmit}
           disabled={!stock.length}
           clearCart={() => updateStock([])}
-          title="確認進貨"
+          title="進貨"
         >
           {stock.map((item, index) => (
             <div className="previewList" key={index}>

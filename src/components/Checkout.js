@@ -114,6 +114,7 @@ const Checkout = () => {
           handleSubmit={handleSubmit}
           disabled={!cart.length}
           clearCart={() => updateCart([])}
+          title="結帳"
         >
           {cart.map((item, index) => (
             <div className="previewList" key={index}>

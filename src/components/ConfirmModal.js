@@ -10,6 +10,7 @@ export default function ConfirmModal(props) {
 
     try {
       await props.handleSubmit();
+      message.success(props.title + "成功");
     } catch (error) {
       message.info("伺服器錯誤: " + error);
     }
@@ -26,10 +27,10 @@ export default function ConfirmModal(props) {
         disabled={props.disabled}
         onClick={() => setVisible(true)}
       >
-        {props.title || "確認結帳"}
+        確認 {props.title}
       </Button>
       <Modal
-        title={props.title || "確認結帳"}
+        title={"確認" + props.title}
         visible={visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
