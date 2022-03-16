@@ -10,7 +10,7 @@ export const axiosIns = axios.create({
 
 export function MutateStock(list) {
   const params = {
-    created: moment().format("YY/MM/DDTHH:mm"),
+    created: moment().format("YYYY/MM/DD-HH:mm"),
     list,
   };
 

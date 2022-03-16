@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="app">
-      <div className="timestamp">{dateTimeStamp}</div>
+      <div className="deployTimestamp">{dateTimeStamp}</div>
       <Header></Header>
       <Outlet />
     </div>

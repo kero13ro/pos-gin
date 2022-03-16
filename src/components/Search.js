@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import { Table, Tag } from "antd";
+import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
+import styled from "@emotion/styled";
 import { FetchStock } from "../utilities/axios";
 import { CategoryList } from "../utilities/constants";
 
@@ -11,8 +14,8 @@ const columns = [
     key: "created",
     render: (time) => (
       <>
-        <div className="fz12">{time.split("T")[0].substr(3)}</div>
-        <div className="fz12 gray">{time.split("T")[1]}</div>
+        <div className="fz12">{moment(time).format("M/DD")}</div>
+        <div className="fz12 gray">{moment(time).format("HH:mm")}</div>
       </>
     ),
   },
@@ -39,15 +42,25 @@ const columns = [
     ),
   },
   {
+    title: "到期日",
+    dataIndex: "expiry",
+    key: "expiry",
+    render: (ts) => <div className="fz12">{moment(ts).format("M/DD")}</div>,
+  },
+  {
     title: "數量",
     dataIndex: "count",
     key: "count",
   },
   {
-    title: "到期日",
-    dataIndex: "expiry",
-    key: "expiry",
-    render: (ts) => <>{ts.substr(5)}</>,
+    title: "售出",
+    dataIndex: "sold",
+    key: "sold",
+    render: (price) => (
+      <>
+        <div className="fz12 gray">{price}</div>
+      </>
+    ),
   },
 ];
 
@@ -78,17 +91,27 @@ export default function Search() {
     };
   }, [updateStockList]);
 
+  const dailyVolume = () =>
+    stockList.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
+
   return (
     <div id="Search">
       <Table
         columns={columns}
         dataSource={stockList.map((ob) => ({
           ...ob,
-          key: `${ob.created}-${ob.cid}-${ob.status}`,
+          key: uuidv4(),
         }))}
         size="small"
         pagination={false}
+        footer={() => {
+          return <Footer>今日營業額：{dailyVolume()}</Footer>;
+        }}
       ></Table>
     </div>
   );
 }
+
+const Footer = styled.div`
+  text-align: right;
+`;
