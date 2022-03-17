@@ -58,8 +58,8 @@ export default function SellList({ handleAddList, stockList }) {
                 <span className="mr-auto info">
                   {item.cat}
                   {item.expiry && (
-                    <small className="expiry gray fz12">
-                      {moment(item.expiry).format("M/DD")}
+                    <small className="gray fz12">
+                      {moment(item.expiry).format("M/DD")} 到期
                     </small>
                   )}
                 </span>
