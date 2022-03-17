@@ -59,7 +59,7 @@ export default function SellList({ handleAddList, stockList }) {
                   {item.cat}
                   {item.expiry && (
                     <small className="gray fz12">
-                      {moment(item.expiry).format("M/DD")} 到期
+                      {moment(item.expiry, "YYYY/MM/DD").format("M/DD")} 到期
                     </small>
                   )}
                 </span>

@@ -87,7 +87,7 @@ const Checkout = ({ stockListStore }) => {
             </div>
             <div className="info">
               即期日：
-              {moment(item.expiry).format("M/DD")}
+              {moment(item.expiry, "YYYY/MM/DD").format("M/DD")}
             </div>
           </div>
         ))}
