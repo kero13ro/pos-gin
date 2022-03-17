@@ -52,8 +52,10 @@ const TableColumns = [
     key: "created",
     render: (time) => (
       <>
-        <div className="fz12">{moment(time).format("M/DD")}</div>
-        <div className="fz12 gray">{moment(time).format("HH:mm")}</div>
+        <div className="fz12">{moment(time, "YYYY/MM/DD").format("M/DD")}</div>
+        <div className="fz12 gray">
+          {moment(time, "YYYY/MM/DD-HH:mm").format("HH:mm")}
+        </div>
       </>
     ),
   },
@@ -83,7 +85,9 @@ const TableColumns = [
     title: "到期日",
     dataIndex: "expiry",
     key: "expiry",
-    render: (ts) => <div className="fz12">{moment(ts).format("M/DD")}</div>,
+    render: (ts) => (
+      <div className="fz12">{moment(ts, "YYYY/MM/DD").format("M/DD")}</div>
+    ),
   },
   {
     title: "數量",
