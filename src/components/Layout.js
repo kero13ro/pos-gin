@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import Header from "components/Header";
 import preval from "preval.macro";
-import useMutateStock from "../hook/useMutateStock";
+import useMutateStock from "hook/useMutateStock";
 
 export default function Layout() {
   const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`;
@@ -10,7 +10,7 @@ export default function Layout() {
 
   useEffect(() => {
     FetchSheet();
-  }, []);
+  }, [FetchSheet]);
 
   return (
     <div>

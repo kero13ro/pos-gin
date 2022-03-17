@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Menu } from "antd";
 import {
   SearchOutlined,
@@ -7,8 +7,6 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
-import { notification } from "antd";
-import { axiosIns } from "../utilities/axios";
 
 export default function Header() {
   const location = useLocation();
@@ -16,16 +14,6 @@ export default function Header() {
 
   const handleClick = (e) => {
     setCurrent(e.key);
-  };
-
-  // useEffect(() => {
-  //   axiosIns.get("all?sheetName=stock").then((res) => {
-  //     console.log(res.data);
-  //   });
-  // }, []);
-
-  const getAll = () => {
-    axiosIns.get("all?sheetName=stock").then((res) => {});
   };
 
   return (

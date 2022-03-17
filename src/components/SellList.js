@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Radio, Button, Spin } from "antd";
 import styled from "@emotion/styled";
 import moment from "moment";
-import { TypeList } from "../utilities/constants";
+import { TypeList } from "utilities/constants";
 
 export default function SellList({ handleAddList, stockList }) {
   const [tabMain, setTabMain] = useState(TypeList[0]);

@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button, message } from "antd";
-import useMutateStock from "../hook/useMutateStock";
+import useMutateStock from "hook/useMutateStock";
 
 export default function ConfirmModal(props) {
   const [visible, setVisible] = React.useState(false);

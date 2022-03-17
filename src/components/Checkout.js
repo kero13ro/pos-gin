@@ -5,10 +5,10 @@ import moment from "moment";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
-import SellList from "./SellList";
-import ConfirmModal from "./ConfirmModal";
-import { MutateStock, makeBalance } from "../utilities/axios";
-import { sumPrice, scrollBottom } from "../utilities/func";
+import SellList from "components/SellList";
+import ConfirmModal from "components/ConfirmModal";
+import { MutateStock, makeBalance } from "utilities/axios";
+import { sumPrice, scrollBottom } from "utilities/func";
 
 const Checkout = ({ stockListStore }) => {
   // 暫存的目前庫存，若確定送出後再更新 store

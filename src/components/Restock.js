@@ -3,11 +3,11 @@ import moment from "moment";
 import { Button, DatePicker } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
-import StockList from "./StockList";
-import ConfirmModal from "./ConfirmModal";
-import NumberCtrl from "./NumberCtrl";
-import { MutateStock } from "../utilities/axios";
-import { scrollBottom } from "../utilities/func";
+import StockList from "components/StockList";
+import ConfirmModal from "components/ConfirmModal";
+import NumberCtrl from "components/NumberCtrl";
+import { MutateStock } from "utilities/axios";
+import { scrollBottom } from "utilities/func";
 import { useImmer } from "use-immer";
 
 const Restock = () => {

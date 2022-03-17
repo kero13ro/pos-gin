@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
-import Restock from "./components/Restock";
-import Checkout from "./components/Checkout";
-import Search from "./components/Search";
-import Layout from "./components/Layout";
+import store from "store";
+import Restock from "components/Restock";
+import Checkout from "components/Checkout";
+import Search from "components/Search";
+import Layout from "components/Layout";
 
 import "antd/dist/antd.min.css";
-import "./style/common.scss";
-import "./style/utility.scss";
-import "./style/vendor.scss";
+import "style/common.scss";
+import "style/utility.scss";
+import "style/vendor.scss";
 
 function App() {
   return (

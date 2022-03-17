@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Table, Tag } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "@emotion/styled";
-import { CategoryList } from "../utilities/constants";
+import { CategoryList } from "utilities/constants";
 
 export default function Search() {
   const stockList = useSelector((state) => state.stock.stockList);

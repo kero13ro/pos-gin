@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { FetchStock } from "../utilities/axios";
-import { updateStock } from "../store/slice/stock";
+import { FetchStock } from "utilities/axios";
+import { updateStock } from "store/slice/stock";
 
 export default function useMutateStock() {
   const [loading, setLoading] = useState(false);

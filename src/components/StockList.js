@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Radio, Button } from "antd";
 import styled from "@emotion/styled";
-import { TypeList } from "../utilities/constants";
+import { TypeList } from "utilities/constants";
 
 export default function StockList({ handleAddList }) {
   const [tabMain, setTabMain] = useState(TypeList[0]);
