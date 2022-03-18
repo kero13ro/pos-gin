@@ -20,7 +20,7 @@
   <div >
     <img src="./src/static/sheet2.png" width="350">
   </div >
-- 前後端分離，後端另外部署至 heroku，設定 CORS 和 request。
+- 前後端分離，後端另外部署至 heroku，設定 CORS 和 request 來源。
 - 在切換頁面時，使用 AbortController 取消撈取 API。
 
 <br>
