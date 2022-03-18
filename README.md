@@ -27,4 +27,6 @@
 
 ## Available Scripts
 
-`npm run deploy`：react-scripts build and deploy to github.
+`npm run firebase`：react-scripts build firebase deploy. (分支 master)
+<br>
+`npm run deploy`：react-scripts build and deploy to github. (設定有差異、分支 deploy2github)

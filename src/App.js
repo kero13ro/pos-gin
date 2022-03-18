@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="root">
       <Provider store={store}>
-        <BrowserRouter basename="/pos-gin">
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Restock />} />
