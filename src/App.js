@@ -14,20 +14,18 @@ import "style/vendor.scss";
 
 function App() {
   return (
-    <div className="root">
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/" element={<Restock />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="*" element={<p className="ma-16">網址輸入錯誤</p>} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Restock />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="*" element={<p className="ma-16">網址輸入錯誤</p>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

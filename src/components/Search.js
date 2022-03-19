@@ -28,21 +28,28 @@ export default function Search() {
         dataSource={fullData}
         size="small"
         pagination={false}
-        footer={() => {
-          return (
-            <Footer>
-              {/* <span>{dailyOut()}</span> */}
-              今日營業額：{dailyVolume()}
-            </Footer>
-          );
-        }}
+        style={{ paddingBottom: "45px" }}
       ></Table>
+
+      <Footer>
+        <div>今日營業額：{dailyVolume()}</div>
+      </Footer>
     </div>
   );
 }
 
 const Footer = styled.div`
-  text-align: right;
+  width: 100vw;
+  height: 45px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgb(204 204 204 / 50%);
 `;
 
 const TableColumns = [

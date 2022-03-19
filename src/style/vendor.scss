@@ -35,6 +35,12 @@
     height: auto;
     border-radius: 0px;
     border: none;
-    box-shadow: none;
+    box-shadow: 0 0 10px rgba(#ccc, 0.5);
+  }
+}
+
+.ant-message {
+  .ant-message-notice {
+    text-align: right;
   }
 }
