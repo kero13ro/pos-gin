@@ -21,14 +21,14 @@ export default function Header() {
       <Menu.Item key="/checkout" icon={<ShoppingCartOutlined />}>
         <Link to="/checkout">結帳</Link>
       </Menu.Item>
-      <Menu.Item key="/" icon={<AppstoreOutlined />}>
-        <Link to="/">入庫</Link>
+      <Menu.Item key="/restock" icon={<AppstoreOutlined />}>
+        <Link to="/restock">入庫</Link>
       </Menu.Item>
       <Menu.Item key="search" icon={<SearchOutlined />}>
         <Link to="/search">查詢</Link>
       </Menu.Item>
-      <Menu.Item key="app3" icon={<SettingOutlined />} disabled>
-        設定
+      <Menu.Item key="config" icon={<SettingOutlined />}>
+        <Link to="/">設定</Link>
       </Menu.Item>
     </Menu>
   );

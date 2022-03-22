@@ -5,6 +5,7 @@ import store from "store";
 import Restock from "components/Restock";
 import Checkout from "components/Checkout";
 import Search from "components/Search";
+import SignInScreen from "components/SignInScreen";
 import Layout from "components/Layout";
 
 import "antd/dist/antd.min.css";
@@ -18,9 +19,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Restock />} />
+            <Route path="/restock" element={<Restock />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/" element={<SignInScreen />} />
             <Route path="*" element={<p className="ma-16">網址輸入錯誤</p>} />
           </Route>
         </Routes>
