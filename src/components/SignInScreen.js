@@ -30,25 +30,33 @@ function SignInScreen() {
       .onAuthStateChanged((user) => {
         setIsSignedIn(!!user);
       });
-    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+    return () => unregisterAuthObserver();
   }, []);
 
-  if (!isSignedIn) {
+  const LoginPop = () => {
     return (
       <>
-        <p>請先登入</p>
+        <p>請先登入(測試版本可略過)</p>
         <StyledFirebaseAuth
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
       </>
     );
-  }
+  };
+
+  const Welcome = () => {
+    return (
+      <>
+        <p>歡迎 {firebase.auth().currentUser.displayName}!</p>
+        <a onClick={() => firebase.auth().signOut()}>登出</a>
+      </>
+    );
+  };
 
   return (
-    <div>
-      <p>歡迎 {firebase.auth().currentUser.displayName}!</p>
-      <a onClick={() => firebase.auth().signOut()}>登出</a>
+    <div id="SignInScreen" className="container">
+      {!isSignedIn ? <LoginPop /> : <Welcome />}
     </div>
   );
 }
