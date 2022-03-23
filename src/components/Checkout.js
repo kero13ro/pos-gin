@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import StatusButton from "components/StatusButton";
 
 import SellList from "components/SellList";
 import ConfirmModal from "components/ConfirmModal";
@@ -26,7 +27,14 @@ const Checkout = ({ stockListStore }) => {
   }, [stockListStore]);
 
   const handleAddList = (item) => {
-    updateCart((cart) => [...cart, item]);
+    updateCart((cart) => [
+      ...cart,
+      {
+        ...item,
+        status: 2,
+        sold: item.price,
+      },
+    ]);
 
     updateStockList((list) => {
       list.find((ob) => ob.cid === item.cid && ob.expiry === item.expiry)
@@ -45,12 +53,7 @@ const Checkout = ({ stockListStore }) => {
       );
 
       if (!sameExpiry) {
-        list.push({
-          ...item,
-          count: 1,
-          status: 2,
-          sold: item.price, // todo
-        });
+        list.push({ ...item, count: 1 });
       } else {
         sameExpiry.count++;
       }
@@ -86,8 +89,11 @@ const Checkout = ({ stockListStore }) => {
               />
             </div>
             <div className="info">
-              即期日：
-              {moment(item.expiry, "YYYY/MM/DD").format("M/DD")}
+              <StatusButton item={item} updateCart={updateCart} index={index} />
+              <div>
+                即期日：
+                {moment(item.expiry, "YYYY/MM/DD").format("M/DD")}
+              </div>
             </div>
           </div>
         ))}
