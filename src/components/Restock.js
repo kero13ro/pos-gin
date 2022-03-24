@@ -17,7 +17,7 @@ const Restock = () => {
   const handleAddList = (item) => {
     const fullItem = {
       ...item,
-      count: 5,
+      count: item.cat.includes("杯裝") ? 50 : 8,
       expiry: moment().add(8, "day"),
     };
 
@@ -97,8 +97,14 @@ const Restock = () => {
                   })
                 }
               />
-              <span className="ml-8">瓶</span>
+              {/* <span className="ml-8">瓶</span> */}
             </div>
+            {item.count < 0 && (
+              <div className="extraInfo">* 注意：將扣除庫存數量</div>
+            )}
+            {item.count > 100 && (
+              <div className="extraInfo">* 注意：數量過大</div>
+            )}
           </div>
         ))}
       </div>

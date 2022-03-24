@@ -7,7 +7,7 @@ export default function NumberCtrl({ count, onChange, onAdd, onMinus }) {
       <Button type="primary" size="small" onClick={onMinus}>
         -
       </Button>
-      <InputNumber min={1} max={20} value={count} onChange={onChange} />
+      <InputNumber min={1} max={100} value={count} onChange={onChange} />
       <Button type="primary" size="small" onClick={onAdd}>
         +
       </Button>
