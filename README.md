@@ -29,10 +29,14 @@
 
 `npm run firebase`：react-scripts build firebase deploy. (分支 master)
 <br>
+[firebase web link](https://sheet1218.web.app/)
+
 `npm run deploy`：react-scripts build and deploy to github. (設定有差異、分支 deploy2github)
+<br>
+[github web link](kero13ro.github.io/pos-gin/)
 
 [ ] 每月查詢，每日營業額，銷售數量、種類<br>
-[ ] 瓶裝預定每次 50 瓶<br>
-[ ] 出貨時，共有五種狀態：售出、開瓶、折扣、破損、下架<br>
+[V] 瓶裝預定每次 50 瓶<br>
+[V] 出貨時，共有五種狀態：售出、開瓶、折扣、破損、下架<br>
 [ ] 每日盤點時，要能看到總瓶數<br>
 [ ] 每日盤點時，要能今日到期數量、要手動點選下架
