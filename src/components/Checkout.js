@@ -31,7 +31,7 @@ const Checkout = ({ stockListStore }) => {
       ...cart,
       {
         ...item,
-        status: 2,
+        status: "b1",
         sold: item.price,
       },
     ]);

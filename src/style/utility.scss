@@ -34,3 +34,41 @@
 .gray {
   color: #777;
 }
+
+.removeTrans {
+  transition-duration: 0s !important;
+}
+
+.status-a1 {
+
+  &:active,
+  &:hover,
+  & {
+    border-color: #a4dd12;
+    background: #a4dd12;
+  }
+}
+
+.status-b1,
+.status-b2,
+.status-b3 {
+
+  &:active,
+  &:hover,
+  & {
+    border-color: #1890ff;
+    background: #1890ff;
+  }
+}
+
+.status-c1,
+.status-c2,
+.status-c3 {
+
+  &:active,
+  &:hover,
+  & {
+    border-color: #ba1e1e;
+    background: #ba1e1e;
+  }
+}

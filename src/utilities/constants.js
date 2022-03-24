@@ -1,4 +1,14 @@
-// status: 1 - 進貨 、2 - 出貨
+export const statusLabelMap = {
+  a1: "入庫",
+
+  b1: "售出",
+  b2: "即期折扣",
+  b3: "開瓶零售",
+
+  c1: "破損",
+  c2: "試喝",
+  c3: "即期下架",
+};
 
 // sheet 1. 商品定義
 export const CategoryList = [

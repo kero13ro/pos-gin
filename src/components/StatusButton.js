@@ -1,25 +1,34 @@
 import React from "react";
-import styled from "@emotion/styled";
 import { Button, Dropdown, Menu } from "antd";
-import { getStatusLabel, statusMap } from "utilities/func";
+import { statusLabelMap } from "utilities/constants";
 
 export default function StatusButton({ item, updateCart, index }) {
-  const Label = styled.div``;
-
   const updateStatus = (key) => {
     updateCart((cart) => {
-      cart[index].status = Number(key);
+      cart[index].status = key;
     });
   };
 
-  const dropOption = Object.entries(statusMap).filter((arr) => arr[0] !== 1);
-  console.log(Object.entries(statusMap));
+  let dropOption = Object.entries(statusLabelMap).filter(
+    (arr) => arr[0] !== "a1"
+  );
+
+  dropOption.splice(3, 0, "Divider");
 
   const FilterMenu = (
     <Menu onClick={(obj) => updateStatus(obj.key)}>
-      {dropOption.map((arr) => (
-        <Menu.Item key={arr[0]}>{arr[1]}</Menu.Item>
-      ))}
+      {dropOption.map((arr) => {
+        if (arr === "Divider") return <Menu.Divider key={arr} />;
+
+        return (
+          <Menu.Item
+            key={arr[0]}
+            className={arr[0] === item.status && "active"}
+          >
+            {arr[1]}
+          </Menu.Item>
+        );
+      })}
     </Menu>
   );
 
@@ -28,9 +37,9 @@ export default function StatusButton({ item, updateCart, index }) {
       <Button
         size="small"
         type="primary"
-        className={"mr-8 status-" + item.status}
+        className={"mr-8 removeTrans status-" + item.status}
       >
-        <Label>{getStatusLabel(item.status)}</Label>
+        {statusLabelMap[item.status]}
       </Button>
     </Dropdown>
   );
