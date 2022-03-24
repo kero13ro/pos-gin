@@ -51,7 +51,10 @@ const Checkout = ({ stockListStore }) => {
 
     cart.forEach((item) => {
       const sameExpiry = list.find(
-        (ob) => ob.cid === item.cid && ob.expiry === item.expiry
+        (ob) =>
+          ob.cid === item.cid &&
+          ob.expiry === item.expiry &&
+          ob.status === item.status
       );
 
       if (!sameExpiry) {

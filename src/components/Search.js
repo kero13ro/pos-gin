@@ -15,9 +15,8 @@ export default function Search() {
     key: uuidv4(),
   }));
 
-  // const dailyVolume = () =>
-  //   fullData.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
-  const dailyVolume = () => 123;
+  const dailyVolume = () =>
+    fullData.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
 
   // const dailyOut = () =>
   //   fullData.map((ob) => Number(ob.count) || 0).reduce((a, b) => a + b, 0);
@@ -72,10 +71,14 @@ const TableColumns = [
     dataIndex: "status",
     key: "status",
     render: (status) => {
-      if (status === "a1") {
-        return <Tag color="green">進貨</Tag>;
-      }
-      return <Tag color="gold">出貨</Tag>;
+      if (status === "b1") return <Tag color="green">售出</Tag>;
+      if (status === "b2") return <Tag color="gold">折扣</Tag>;
+      if (status === "b3") return <Tag color="gold">零售</Tag>;
+      if (status === "c1") return <Tag color="gold">破損</Tag>;
+      if (status === "c2") return <Tag color="gold">試喝</Tag>;
+      if (status === "c3") return <Tag color="gold">下架</Tag>;
+
+      return <Tag color="green">入庫</Tag>;
     },
   },
   {
@@ -103,12 +106,15 @@ const TableColumns = [
     key: "count",
   },
   {
-    title: "折價",
+    title: "售價",
     dataIndex: "discount",
     key: "discount",
-    render: (price) => (
+    render: (price, ob) => (
       <>
-        <div className="fz12 gray">{price}</div>
+        {ob.discount && ob.discount !== "0" && (
+          <div className="fz12 gray">-{ob.discount}</div>
+        )}
+        <div className="fz12 bold">{ob.sold}</div>
       </>
     ),
   },
