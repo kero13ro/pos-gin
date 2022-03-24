@@ -5,6 +5,7 @@ import moment from "moment";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import StatusButton from "components/StatusButton";
+import DiscountDropdown from "components/DiscountDropdown";
 
 import SellList from "components/SellList";
 import ConfirmModal from "components/ConfirmModal";
@@ -32,6 +33,7 @@ const Checkout = ({ stockListStore }) => {
       {
         ...item,
         status: "b1",
+        discount: 0,
         sold: item.price,
       },
     ]);
@@ -62,6 +64,17 @@ const Checkout = ({ stockListStore }) => {
     await MutateStock(list);
   };
 
+  const getActualPrice = ({ status, price, sold }) => {
+    if (status === "b1") return <>{price}</>;
+
+    return (
+      <>
+        <div className="delete">{price}</div>
+        <div className="tx_bold">{sold}</div>
+      </>
+    );
+  };
+
   return (
     <div id="Checkout">
       <SellList handleAddList={handleAddList} stockList={stockList} />
@@ -70,9 +83,11 @@ const Checkout = ({ stockListStore }) => {
         {cart.map((item, index) => (
           <div className="restockList" key={index}>
             <div className="flex-center">
-              <b className="mr-auto">{item.type}</b>
-              {item.price}元<div className="slash"> / </div>
-              <div className="mr-8">{item.cat}</div>
+              <b className="mr-8">{item.type}</b>
+              <div className="mr-auto gray">{item.cat}</div>
+              {getActualPrice(item)}
+              <div>元</div>
+
               <Button
                 className="deleteBtn"
                 shape="circle"
@@ -89,8 +104,21 @@ const Checkout = ({ stockListStore }) => {
               />
             </div>
             <div className="info">
-              <StatusButton item={item} updateCart={updateCart} index={index} />
-              <div>
+              <div className="mr-auto">
+                <StatusButton
+                  item={item}
+                  updateCart={updateCart}
+                  index={index}
+                />
+                {item.status === "b2" && (
+                  <DiscountDropdown
+                    item={item}
+                    updateCart={updateCart}
+                    index={index}
+                  />
+                )}
+              </div>
+              <div className="">
                 即期日：
                 {moment(item.expiry, "YYYY/MM/DD").format("M/DD")}
               </div>

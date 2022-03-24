@@ -6,6 +6,15 @@ export default function StatusButton({ item, updateCart, index }) {
   const updateStatus = (key) => {
     updateCart((cart) => {
       cart[index].status = key;
+
+      if (key === "a1") cart[index].sold = cart[index].price;
+      if (key === "b1") cart[index].sold = cart[index].price;
+      if (key === "b2")
+        cart[index].sold = cart[index].price - cart[index].discount;
+      if (key === "b3") cart[index].sold = 0;
+      if (key === "c1") cart[index].sold = 0;
+      if (key === "c2") cart[index].sold = 0;
+      if (key === "c3") cart[index].sold = 0;
     });
   };
 

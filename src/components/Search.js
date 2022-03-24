@@ -15,8 +15,9 @@ export default function Search() {
     key: uuidv4(),
   }));
 
-  const dailyVolume = () =>
-    fullData.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
+  // const dailyVolume = () =>
+  //   fullData.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
+  const dailyVolume = () => 123;
 
   // const dailyOut = () =>
   //   fullData.map((ob) => Number(ob.count) || 0).reduce((a, b) => a + b, 0);
@@ -71,7 +72,7 @@ const TableColumns = [
     dataIndex: "status",
     key: "status",
     render: (status) => {
-      if (status === "1") {
+      if (status === "a1") {
         return <Tag color="green">進貨</Tag>;
       }
       return <Tag color="gold">出貨</Tag>;
@@ -102,9 +103,9 @@ const TableColumns = [
     key: "count",
   },
   {
-    title: "售出",
-    dataIndex: "sold",
-    key: "sold",
+    title: "折價",
+    dataIndex: "discount",
+    key: "discount",
     render: (price) => (
       <>
         <div className="fz12 gray">{price}</div>

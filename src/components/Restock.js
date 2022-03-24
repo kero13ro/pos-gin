@@ -38,7 +38,7 @@ const Restock = () => {
   const handleSubmit = async () => {
     const list = stock.map((item) => ({
       ...item,
-      status: 1,
+      status: "a1",
       expiry: item.expiry.format("YYYY/MM/DD"),
     }));
 

@@ -44,7 +44,7 @@
 
   .restockList {
     position: relative;
-    padding: 6px 18px 6px 14px;
+    padding: 6px 24px 6px 14px;
     border-bottom: 1px solid #ccc;
 
     .info {
@@ -82,4 +82,22 @@
 
 .container {
   padding: 12px;
+}
+
+.delete {
+  color: rgb(203, 27, 27);
+  padding: 0 3px;
+  margin-right: 3px;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    width: calc(100%);
+    left: 0;
+    top: 50%;
+
+    position: absolute;
+    border-bottom: 1px solid rgb(203, 27, 27);
+  }
 }

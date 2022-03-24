@@ -27,7 +27,7 @@ export async function FetchStock() {
 // 平衡收支、返回當前剩餘庫存
 export function makeBalance(list) {
   // 1. 將入庫同類商品全部加總
-  let incomeList = list.filter((ob) => ob.status === "1");
+  let incomeList = list.filter((ob) => ob.status === "a1");
   let incomeListByUnique = [];
   incomeList.forEach((ob1) => {
     const target = incomeListByUnique.find(
@@ -41,7 +41,7 @@ export function makeBalance(list) {
   });
 
   // 2. 扣除出庫數量
-  let outcomeList = list.filter((ob) => ob.status === "2");
+  let outcomeList = list.filter((ob) => ob.status !== "a1");
   outcomeList.forEach((ob1) => {
     const target = incomeListByUnique.find(
       (ob2) => ob1.cid === ob2.cid && ob1.expiry === ob2.expiry

@@ -35,6 +35,10 @@
   color: #777;
 }
 
+.tx_bold {
+  font-weight: bold;
+}
+
 .removeTrans {
   transition-duration: 0s !important;
 }
@@ -43,6 +47,7 @@
 
   &:active,
   &:hover,
+  &:focus,
   & {
     border-color: #a4dd12;
     background: #a4dd12;
@@ -55,6 +60,7 @@
 
   &:active,
   &:hover,
+  &:focus,
   & {
     border-color: #1890ff;
     background: #1890ff;
@@ -67,6 +73,7 @@
 
   &:active,
   &:hover,
+  &:focus,
   & {
     border-color: #ba1e1e;
     background: #ba1e1e;
