@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { Table, Tag, Button } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { Table, Tag, Button, Radio } from "antd";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
@@ -11,12 +11,20 @@ import { scrollBottom } from "utilities/func";
 export default function Search() {
   const selectedPanel = useRef(null);
   const stockList = useSelector((state) => state.stock.stockList);
+  const [filterType, setFilterType] = useState("all");
 
   const fullData = stockList.map((ob) => ({
     ...ob,
     ...CategoryList.find((ob2) => ob.cid === ob2.cid),
     key: uuidv4(),
   }));
+
+  const FilteredByOption = fullData.filter((ob) => {
+    if (filterType === "import") return ob.status === "a1";
+    if (filterType === "export") return ob.status !== "a1";
+
+    return true;
+  });
 
   const dailyVolume = () =>
     fullData.map((ob) => Number(ob.sold) || 0).reduce((a, b) => a + b, 0);
@@ -30,9 +38,20 @@ export default function Search() {
 
   return (
     <div id="Search" ref={selectedPanel}>
+      <Radio.Group
+        options={[
+          { label: "全部", value: "all" },
+          { label: "入庫", value: "import" },
+          { label: "出庫", value: "export" },
+        ]}
+        className="mb-4"
+        onChange={(e) => setFilterType(e.target.value)}
+        value={filterType}
+        optionType="button"
+      />
       <Table
         columns={TableColumns}
-        dataSource={fullData}
+        dataSource={FilteredByOption}
         size="small"
         pagination={false}
         style={{ paddingBottom: "45px" }}
@@ -40,7 +59,7 @@ export default function Search() {
 
       <Footer>
         <Button type="primary" className="mr-auto" size="medium">
-          <Link to="/inventory">盤點</Link>
+          <Link to="/inventory">盤點庫存</Link>
         </Button>
         <div>今日營業額：{dailyVolume()}</div>
       </Footer>
