@@ -68,12 +68,12 @@ const Checkout = ({ stockListStore }) => {
   };
 
   const getActualPrice = ({ status, price, sold }) => {
-    if (status === "b1") return <>{price}</>;
+    if (status === "b1") return <>{price} 元</>;
 
     return (
       <>
         <div className="delete">{price}</div>
-        <div className="tx_bold">{sold}</div>
+        <div className="tx_bold">{sold} 元</div>
       </>
     );
   };
@@ -89,7 +89,6 @@ const Checkout = ({ stockListStore }) => {
               <b className="mr-8">{item.type}</b>
               <div className="mr-auto gray">{item.cat}</div>
               {getActualPrice(item)}
-              <div>元</div>
 
               <Button
                 className="deleteBtn"
@@ -146,13 +145,16 @@ const Checkout = ({ stockListStore }) => {
         >
           {cart.map((item, index) => (
             <div className="previewList" key={index}>
-              <div className="mr-auto">{item.type}</div>
-              {item.price}元<div className="slash"> / </div>
-              {item.cat}
+              <b className="mr-8">{item.type}</b>
+              <div className="mr-auto gray">{item.cat}</div>
+              {getActualPrice(item)}
             </div>
           ))}
 
-          <div className="previewSum">{sumPrice(cart)}元</div>
+          <div className="previewSum">
+            <span className="mr-8">應收金額</span>
+            {sumPrice(cart)}元
+          </div>
         </ConfirmModal>
       </div>
     </div>

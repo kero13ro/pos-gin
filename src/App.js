@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "store";
+import Inventory from "components/Inventory";
 import Restock from "components/Restock";
 import Checkout from "components/Checkout";
 import Search from "components/Search";
@@ -19,6 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route path="/inventory" element={<Inventory />} />
             <Route path="/restock" element={<Restock />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/search" element={<Search />} />

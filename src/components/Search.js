@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { Table, Tag, Button } from "antd";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Table, Tag } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "@emotion/styled";
 import { CategoryList } from "utilities/constants";
+import { scrollBottom } from "utilities/func";
 
 export default function Search() {
+  const selectedPanel = useRef(null);
   const stockList = useSelector((state) => state.stock.stockList);
 
   const fullData = stockList.map((ob) => ({
@@ -21,8 +24,12 @@ export default function Search() {
   // const dailyOut = () =>
   //   fullData.map((ob) => Number(ob.count) || 0).reduce((a, b) => a + b, 0);
 
+  useEffect(() => {
+    scrollBottom(selectedPanel, false);
+  }, [stockList]);
+
   return (
-    <div id="Search">
+    <div id="Search" ref={selectedPanel}>
       <Table
         columns={TableColumns}
         dataSource={fullData}
@@ -32,6 +39,9 @@ export default function Search() {
       ></Table>
 
       <Footer>
+        <Button type="primary" className="mr-auto" size="medium">
+          <Link to="/inventory">盤點</Link>
+        </Button>
         <div>今日營業額：{dailyVolume()}</div>
       </Footer>
     </div>
@@ -47,7 +57,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 20px;
   background-color: #fff;
   box-shadow: 0 0 10px rgb(204 204 204 / 50%);
 `;
@@ -71,14 +81,14 @@ const TableColumns = [
     dataIndex: "status",
     key: "status",
     render: (status) => {
-      if (status === "b1") return <Tag color="green">售出</Tag>;
-      if (status === "b2") return <Tag color="gold">折扣</Tag>;
-      if (status === "b3") return <Tag color="gold">零售</Tag>;
-      if (status === "c1") return <Tag color="gold">破損</Tag>;
-      if (status === "c2") return <Tag color="gold">試喝</Tag>;
-      if (status === "c3") return <Tag color="gold">下架</Tag>;
+      if (status === "b1") return <Tag color="lime">售出</Tag>;
+      if (status === "b2") return <Tag color="green">折扣</Tag>;
+      if (status === "b3") return <Tag color="green">零售</Tag>;
+      if (status === "c1") return <Tag color="magenta">破損</Tag>;
+      if (status === "c2") return <Tag color="magenta">試喝</Tag>;
+      if (status === "c3") return <Tag color="magenta">下架</Tag>;
 
-      return <Tag color="green">入庫</Tag>;
+      return <Tag color="blue">入庫</Tag>;
     },
   },
   {
@@ -104,18 +114,19 @@ const TableColumns = [
     title: "數量",
     dataIndex: "count",
     key: "count",
+    render: (val) => <div className="tx_right">{val}</div>,
   },
   {
     title: "售價",
     dataIndex: "discount",
     key: "discount",
     render: (price, ob) => (
-      <>
+      <div className="tx_right">
         {ob.discount && ob.discount !== "0" && (
-          <div className="fz12 gray">-{ob.discount}</div>
+          <div className="fz12 delete">{ob.price}</div>
         )}
         <div className="fz12 bold">{ob.sold}</div>
-      </>
+      </div>
     ),
   },
 ];
