@@ -101,3 +101,13 @@
     border-bottom: 1px solid rgb(203, 27, 27);
   }
 }
+
+#Inventory {
+  padding: 10px 16px;
+
+  .row {
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+  }
+}
