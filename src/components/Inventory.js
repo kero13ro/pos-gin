@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Checkbox } from "antd";
 import { useSelector } from "react-redux";
 import { CategoryList } from "utilities/constants";
 
@@ -9,6 +9,7 @@ export default function Inventory() {
   const CategoryWithSum = CategoryList.map((ob) => ({
     ...ob,
     sum: 0,
+    checked: false,
     key: ob.cid,
   }));
 
@@ -51,5 +52,20 @@ const TableColumns = [
     dataIndex: "sum",
     key: "sum",
     render: (val) => <div className="tx_right">{val}</div>,
+  },
+  {
+    title: "確認",
+    dataIndex: "cid",
+    key: "cid",
+    render: (_, ob) => (
+      <div className="tx_center">
+        <Checkbox
+        // onChange={(e) => {
+        //   console.log(e.target.checked);
+        //   console.log(e.target);
+        // }}
+        />
+      </div>
+    ),
   },
 ];
