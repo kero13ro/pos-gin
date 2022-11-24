@@ -5,7 +5,7 @@ export const axiosIns = axios.create({
   baseURL:
     process.env.NODE_ENV === "development"
       ? "http://localhost:9107/"
-      : "https://sheet1218.herokuapp.com",
+      : "https://ismpnrc5vm.ap-northeast-1.awsapprunner.com/",
 });
 
 export function MutateStock(list) {
