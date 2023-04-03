@@ -4,7 +4,7 @@ import { FetchStock } from "utilities/axios";
 import { updateStock } from "store/slice/stock";
 
 export default function useMutateStock() {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const dispatch = useDispatch();
 
   const FetchSheet = () => {
