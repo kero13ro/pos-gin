@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route, HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "store";
@@ -22,9 +22,9 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Checkout />} />
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/restock" element={<Restock />} />
-            <Route path="/" element={<Checkout />} />
             <Route path="/search" element={<Search />} />
             <Route path="/sign" element={<SignInScreen />} />
             <Route path="*" element={<p className="ma-16">網址輸入錯誤</p>} />
